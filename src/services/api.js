@@ -52,3 +52,14 @@ export const getProductsByCategory = async (slug) => {
         return [];
     }
 };
+
+export const getProductBySlug = async (slug) => {
+    try {
+        // Llama al endpoint de Java: ProductController.getProductBySlug
+        const response = await axios.get(`${API_URL}/products/${slug}`);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching product details for slug ${slug}:`, error);
+        return null;
+    }
+};

@@ -11,7 +11,7 @@ export default function CategoryCarousel({ categories }) {
   return (
     <div className="py-4">
       {/* Título centrado explícitamente */}
-      <h2 className="text-2xl font-bold mb-8 text-center text-gray-800">Compra por Categoría</h2>
+      <h2 className="text-2xl font-bold mb-8 text-center text-gray-800">Descubre todas nuestras categorias</h2>
       
       <Swiper
         modules={[Navigation]}

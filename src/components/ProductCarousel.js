@@ -61,7 +61,7 @@ export default function ProductCarousel({ title, products }) {
               {/* Precio y Botón Centrados */}
               <div className="mt-4 flex flex-col items-center gap-3 w-full">
                   <span className="text-2xl font-extrabold text-gray-900">S/ {product.price}</span>
-                  <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2.5 px-4 rounded-xl font-medium transition flex justify-center items-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
+                  <button className="w-full bg-primary hover:bg-primary-hover text-white py-2.5 px-4 rounded-xl font-medium transition flex justify-center items-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
                       <span>Agregar</span>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

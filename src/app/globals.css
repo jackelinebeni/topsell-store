@@ -1,8 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #E31E24;
+  --color-primary-hover: #bf1a1f;
+  --color-secondary: #1D1D1B;
+}
 
 /* Opcional: Estilo base para el body */
 body {
     background-color: #f9fafb;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: var(--color-secondary) !important;
+}
+.swiper-button-prev:hover, .swiper-button-next:hover {
+    color: var(--color-primary) !important;
+}
+.swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
 }
