@@ -12,9 +12,9 @@ export default function ProductCarousel({ title, products }) {
     <div className="px-4">
       {/* Título de sección y enlace 'Ver todo' centrados o equilibrados */}
       <div className="flex flex-col items-center mb-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-          <div className="w-16 h-1 bg-orange-500 mt-2 mb-4 rounded-full"></div> {/* Decoración visual */}
-          <a href="#" className="text-orange-600 text-sm font-semibold hover:underline">Ver catálogo completo</a>
+          <h2 className="text-2xl font-bold text-secondary">{title}</h2>
+          <div className="w-16 h-1 bg-primary mt-2 mb-4 rounded-full"></div> {/* Decoración visual */}
+          <a href="#" className="text-primary text-sm font-semibold hover:underline">Ver catálogo completo</a>
       </div>
       
       <Swiper
@@ -50,7 +50,7 @@ export default function ProductCarousel({ title, products }) {
                   <span className="inline-block px-2 py-1 bg-gray-100 text-xs font-medium text-gray-500 rounded-md mb-2">
                     {product.category?.name || 'General'}
                   </span>
-                  <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 leading-tight">
+                  <h3 className="font-bold text-secondary text-lg mb-2 line-clamp-2 leading-tight">
                     {product.name}
                   </h3>
                   <p className="text-sm text-gray-500 line-clamp-2 mb-4 px-2">
@@ -60,7 +60,6 @@ export default function ProductCarousel({ title, products }) {
 
               {/* Precio y Botón Centrados */}
               <div className="mt-4 flex flex-col items-center gap-3 w-full">
-                  <span className="text-2xl font-extrabold text-gray-900">S/ {product.price}</span>
                   <button className="w-full bg-primary hover:bg-primary-hover text-white py-2.5 px-4 rounded-xl font-medium transition flex justify-center items-center gap-2 shadow-md hover:shadow-lg transform active:scale-95">
                       <span>Agregar</span>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">

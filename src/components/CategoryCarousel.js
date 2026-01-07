@@ -11,7 +11,7 @@ export default function CategoryCarousel({ categories }) {
   return (
     <div className="py-4">
       {/* Título centrado explícitamente */}
-      <h2 className="text-2xl font-bold mb-8 text-center text-gray-800">Descubre todas nuestras categorias</h2>
+      <h2 className="text-2xl font-bold mb-8 text-center text-secondary">Descubre todas nuestras categorias</h2>
       
       <Swiper
         modules={[Navigation]}
@@ -30,7 +30,7 @@ export default function CategoryCarousel({ categories }) {
           <SwiperSlide key={cat.id}>
             {/* Flex column + Items Center = Centrado perfecto */}
             <div className="flex flex-col items-center justify-center group cursor-pointer">
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-orange-500 transition duration-300 shadow-sm">
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-primary transition duration-300 shadow-sm">
                 <Image
                   src={cat.image || 'https://placehold.co/300x300'}
                   alt={cat.name}
@@ -39,7 +39,7 @@ export default function CategoryCarousel({ categories }) {
                   unoptimized
                 />
               </div>
-              <h3 className="mt-4 font-semibold text-gray-700 group-hover:text-orange-600 text-center">
+              <h3 className="mt-4 font-semibold text-secondary group-hover:text-primary text-center">
                 {cat.name}
               </h3>
             </div>

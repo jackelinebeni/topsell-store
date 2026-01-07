@@ -2,52 +2,49 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ShopProductCard({ product }) {
-  // Lógica simple para simular estados (puedes ajustarla con datos reales luego)
+  // Solo lógica de stock, quitamos lógica de oferta por precio
   const isOutOfStock = product.stock === 0; 
-  const isOffer = product.price < 100; // Ejemplo: Si vale menos de 100 es oferta
 
   return (
     <div className="group flex flex-col items-center text-center">
       
       {/* Imagen + Badge */}
-      <div className="relative w-full aspect-square mb-4 overflow-hidden">
-        {/* Badge (Etiqueta) */}
-        <div className="absolute top-0 left-0 z-10">
-            {isOutOfStock ? (
-                <span className="bg-gray-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider">
+      <div className="relative w-full aspect-square mb-4 overflow-hidden rounded-lg bg-gray-50">
+        
+        {/* Badge (Solo Agotado) */}
+        <div className="absolute top-2 left-2 z-10">
+            {isOutOfStock && (
+                <span className="bg-gray-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-sm">
                     Agotado
-                </span>
-            ) : isOffer && (
-                <span className="bg-primary text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider">
-                    Oferta
                 </span>
             )}
         </div>
 
         <Image
-          src="https://placehold.co/400x400?text=Producto" // Placeholder
+          src={product.imageUrl || product.image || 'https://placehold.co/400x400?text=Producto'} 
           alt={product.name}
           fill
-          className="object-contain group-hover:scale-105 transition duration-500"
+          className="object-contain p-4 group-hover:scale-105 transition duration-500"
           unoptimized
         />
       </div>
 
-      {/* Info */}
-      <div className="space-y-1">
+      {/* Info (SIN PRECIO) */}
+      <div className="space-y-2 w-full px-2">
         <p className="text-[10px] text-gray-400 uppercase tracking-widest font-medium">
             {product.category?.name || 'General'}
         </p>
+        
         <h3 className="text-gray-800 font-medium text-sm line-clamp-2 min-h-[40px]">
             {product.name}
         </h3>
         
-        {/* Enlace "Ver Producto" estilo link rojo */}
+        {/* Enlace limpio */}
         <Link 
             href={`/producto/${product.slug}`} 
-            className="inline-block text-xs font-bold text-primary border-b border-primary/30 hover:border-primary mt-2 pb-0.5 transition"
+            className="inline-block text-xs font-bold text-primary hover:text-secondary border-b border-primary/30 hover:border-secondary transition pb-0.5"
         >
-            Ver Producto
+            Ver Características
         </Link>
       </div>
     </div>
