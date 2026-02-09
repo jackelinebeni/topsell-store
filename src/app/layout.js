@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext"; // <--- ESTO ES LO QUE FALTA
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata = {
   title: {
@@ -18,6 +18,7 @@ export const metadata = {
   icons: {
     icon: "/logotipo.png",
   },
+  charset: "UTF-8",
 };
 
 export default function RootLayout({ children }) {
