@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { FaCubes, FaGem, FaShieldAlt, FaHandshake, FaSearch, FaChessKnight } from "react-icons/fa";
 
+export const metadata = {
+  title: "Nosotros",
+};
+
 export default function NosotrosPage() {
   return (
     <main className="bg-white min-h-screen">
       
       {/* CONTENEDOR PRINCIPAL */}
-      <div className="container mx-auto max-w-[1600px] px-6 sm:px-8 lg:px-12 py-20 space-y-32">
+      <div className="container mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-20 space-y-32">
 
         {/* 1. SECCIÓN ¿QUIÉNES SOMOS? (Centrado) */}
         <section className="text-center flex flex-col items-center py-8">
@@ -75,7 +79,7 @@ export default function NosotrosPage() {
         <section className="text-center py-8">
           <h2 className="text-5xl md:text-6xl font-extrabold text-secondary mb-16">Nuestros Valores</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Valor 1 */}
             <ValueCard 
               icon={<FaCubes />} 
@@ -90,27 +94,15 @@ export default function NosotrosPage() {
             />
             {/* Valor 3 */}
             <ValueCard 
-              icon={<FaShieldAlt />} 
-              title="Integridad" 
-              desc="Actuamos con transparencia, ética y responsabilidad en todas nuestras relaciones comerciales."
-            />
-            {/* Valor 4 */}
-            <ValueCard 
               icon={<FaHandshake />} 
               title="Compromiso" 
               desc="Escuchamos y entendemos a nuestros clientes para ofrecerles soluciones que realmente agreguen valor."
             />
-            {/* Valor 5 */}
+            {/* Valor 4 */}
             <ValueCard 
               icon={<FaSearch />} 
               title="Transparencia" 
               desc="Actuamos con claridad y honestidad en nuestras comunicaciones y relaciones comerciales."
-            />
-            {/* Valor 6 */}
-            <ValueCard 
-              icon={<FaChessKnight />} 
-              title="Estrategia" 
-              desc="Impulsamos el desarrollo de marcas que atienden distintos segmentos y necesidades del mercado."
             />
           </div>
         </section>

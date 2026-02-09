@@ -58,7 +58,7 @@ function TiendaContent() {
   // Limpiar filtros
   const handleClearFilters = () => {
     setCurrentPage(1);
-    router.push('/tienda');
+    router.push('/productos');
   };
 
   // Manejar selección de categoría
@@ -66,7 +66,7 @@ function TiendaContent() {
     setCurrentPage(1);
     const params = new URLSearchParams();
     params.set('category', slug);
-    router.push(`/tienda?${params.toString()}`);
+    router.push(`/productos?${params.toString()}`);
   };
 
   // Manejar selección de subcategoría
@@ -82,7 +82,7 @@ function TiendaContent() {
       params.set('category', parentCategory.slug);
     }
     params.set('subcategory', slug);
-    router.push(`/tienda?${params.toString()}`);
+    router.push(`/productos?${params.toString()}`);
   };
 
   // Navegación de páginas
@@ -100,7 +100,7 @@ function TiendaContent() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      <div className="container mx-auto max-w-[1800px] px-6 sm:px-8 lg:px-12 py-12">
+      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 py-12">
         
         {/* LAYOUT: Sidebar (Izquierda) - Contenido (Derecha) */}
         <div className="flex flex-col md:flex-row gap-12">

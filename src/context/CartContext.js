@@ -67,12 +67,17 @@ export function CartProvider({ children }) {
     setCart(prev => prev.filter(item => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem('topsell_cart');
+  };
+
   // Evitamos mostrar nada hasta que el carrito haya cargado para no tener saltos visuales
   // Opcional: Puedes retornar null si prefieres que no se vea nada hasta cargar
   
   return (
     <CartContext.Provider value={{ 
-        cart, addToCart, updateQuantity, removeFromCart, totalItems 
+        cart, addToCart, updateQuantity, removeFromCart, clearCart, totalItems 
     }}>
       {children}
     </CartContext.Provider>

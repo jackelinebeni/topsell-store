@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext'; // Importar AuthContext
 import { FaArrowLeft, FaTrash, FaCheckCircle, FaSpinner } from 'react-icons/fa'; // Iconos nuevos
 
 export default function CarritoPage() {
-  const { cart, updateQuantity, removeFromCart, totalItems } = useCart();
+  const { cart, updateQuantity, removeFromCart, clearCart, totalItems } = useCart();
   const { user, token } = useAuth(); // Necesitamos el token para enviar la petición
   const router = useRouter();
   
@@ -47,10 +47,9 @@ export default function CarritoPage() {
 
         if (!response.ok) throw new Error('Error al enviar la cotización');
 
-        // 4. Éxito
+        // 4. Éxito - limpiar carrito completamente
+        clearCart();
         setSuccess(true);
-        // Opcional: Limpiar carrito aquí
-        // localStorage.removeItem('topsell_cart'); 
         
     } catch (error) {
         alert("Hubo un problema enviando tu solicitud. Inténtalo de nuevo.");
@@ -69,7 +68,7 @@ export default function CarritoPage() {
               <p className="text-gray-500 max-w-md mb-8">
                   Hemos enviado un correo a <strong>{user.email}</strong> con los precios detallados y el total de tu solicitud.
               </p>
-              <Link href="/tienda" className="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-primary-hover transition">
+              <Link href="/productos" className="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-primary-hover transition">
                   Volver a la Tienda
               </Link>
           </div>
@@ -81,7 +80,7 @@ export default function CarritoPage() {
      return (
       <div className="container mx-auto py-20 text-center px-4 min-h-[50vh] flex flex-col justify-center items-center">
         <h2 className="text-2xl font-bold text-secondary mb-4">Tu lista de cotización está vacía</h2>
-        <Link href="/tienda" className="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-black transition">
+        <Link href="/productos" className="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-black transition">
           Ir al catálogo
         </Link>
       </div>
@@ -90,7 +89,7 @@ export default function CarritoPage() {
 
   return (
     <div className="bg-white min-h-screen font-sans py-12">
-      <div className="container mx-auto max-w-[1800px] px-6 sm:px-8 lg:px-12">
+      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8">
         
         <h1 className="text-5xl font-extrabold text-secondary mb-8">Solicitud de Cotización</h1>
 
@@ -155,7 +154,7 @@ export default function CarritoPage() {
             </div>
 
              <div className="mt-8">
-              <Link href="/tienda" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-bold transition text-sm">
+              <Link href="/productos" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-bold transition text-sm">
                 <FaArrowLeft /> Agregar más productos
               </Link>
             </div>

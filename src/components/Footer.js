@@ -1,12 +1,12 @@
 "use client";
-import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Footer() {
   return (
     // Aumenté el padding vertical (pt-24 pb-12) para dar más aire
     <footer className="bg-secondary text-gray-300 pt-24 pb-12 text-base">
-      <div className="container mx-auto max-w-[1800px] px-6 sm:px-8 lg:px-12">
+      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8">
         
         {/* --- SECCIÓN SUPERIOR: SUSCRIPCIÓN --- */}
         {/* Aumenté el gap a 16 para separar más el logo del texto y del input */}
@@ -65,11 +65,11 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-8 text-xl tracking-wide">Contacto</h4>
             {/* Listas con texto base y mayor separación vertical (space-y-4) */}
             <ul className="space-y-4 text-base text-gray-400 leading-relaxed">
-              <li className="hover:text-white transition cursor-pointer">ventas@topsell.com</li>
               <li>
                 <p>Lunes - Viernes: 9:00AM - 6:00PM</p>
                 <p>Sábado: 9:00AM - 2:00PM</p>
               </li>
+              <li className="hover:text-white transition cursor-pointer">ventas@topsell.com</li>
             </ul>
 
             {/* Botones de WhatsApp un poco más grandes */}
@@ -147,6 +147,12 @@ export default function Footer() {
                 className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
               >
                 <FaInstagram />
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
+              >
+                <FaTiktok />
               </a>
               <a
                 href="#"

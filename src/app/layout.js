@@ -10,7 +10,10 @@ import { AuthProvider } from "@/context/AuthContext"; // <--- ESTO ES LO QUE FAL
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Topsell Store",
+  title: {
+    default: "Topsell",
+    template: "Topsell | %s",
+  },
   description: "Tienda oficial de Topsell Perú",
   icons: {
     icon: "/logotipo.png",

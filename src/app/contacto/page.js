@@ -114,7 +114,7 @@ function ContactForm() {
   return (
     <main className="bg-white min-h-screen flex items-center">
       
-      <div className="container mx-auto max-w-[1600px] px-6 sm:px-8 lg:px-12 py-16">
+      <div className="container mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-16">
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           

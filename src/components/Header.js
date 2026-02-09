@@ -14,6 +14,10 @@ export default function Header() {
   const [isStoreHovered, setIsStoreHovered] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   
+  // --- ESTADOS PARA MENÚ MÓVIL ---
+  const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
+  const [expandedMobileCategory, setExpandedMobileCategory] = useState(null);
+  
   // --- ESTADOS PARA BÚSQUEDA EN VIVO ---
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -75,13 +79,28 @@ export default function Header() {
     e.preventDefault();
     setShowPreview(false);
     if (searchTerm.trim()) {
-      router.push(`/tienda?query=${encodeURIComponent(searchTerm)}`);
+      router.push(`/productos?query=${encodeURIComponent(searchTerm)}`);
     }
+  };
+
+  const toggleMobileCategories = () => {
+    setIsMobileCategoriesOpen(!isMobileCategoriesOpen);
+    setExpandedMobileCategory(null);
+  };
+
+  const toggleMobileCategory = (categoryId) => {
+    setExpandedMobileCategory(expandedMobileCategory === categoryId ? null : categoryId);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileCategoriesOpen(false);
+    setExpandedMobileCategory(null);
   };
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100 font-sans">
-      <div className="container mx-auto max-w-[1800px] px-6 sm:px-8 lg:px-12 relative">
+      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 relative">
         {/* Contenedor principal flex */}
         <div className="flex justify-between items-center h-24 gap-4">
 
@@ -102,8 +121,8 @@ export default function Header() {
                 onMouseEnter={() => setIsStoreHovered(true)}
                 onMouseLeave={() => setIsStoreHovered(false)}
             >
-                <Link href="/tienda" className="text-base font-bold text-secondary hover:text-primary transition uppercase tracking-wide cursor-pointer h-full flex items-center">
-                  Tienda
+                <Link href="/productos" className="text-base font-bold text-secondary hover:text-primary transition uppercase tracking-wide cursor-pointer h-full flex items-center">
+                  Productos
                 </Link>
                 {/* Mega Menu Dropdown */}
                 {isStoreHovered && (
@@ -123,7 +142,7 @@ export default function Header() {
                                         {activeCategory.subCategories.map((sub) => (
                                             <li key={sub.id}>
                                                 <Link 
-                                                    href={`/tienda?category=${activeCategory.slug}&subcategory=${sub.slug}`}
+                                                    href={`/productos?category=${activeCategory.slug}&subcategory=${sub.slug}`}
                                                     onClick={() => setIsStoreHovered(false)}
                                                     className="text-gray-500 hover:text-primary text-base transition hover:underline block"
                                                 >
@@ -302,7 +321,7 @@ export default function Header() {
       </div>
 
       {isMobileMenuOpen && (
-         <div className="xl:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg p-4">
+         <div className="xl:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg p-4 max-h-[80vh] overflow-y-auto">
              <form onSubmit={handleSearchSubmit} className="mb-4 relative">
                 <input 
                     type="text" 
@@ -321,11 +340,65 @@ export default function Header() {
                      <button onClick={logout} className="text-red-500 text-sm mt-1">Cerrar Sesión</button>
                  </div>
              ) : (
-                 <Link href="/login" className="block mb-4 font-bold text-secondary">Iniciar Sesión</Link>
+                 <Link href="/login" onClick={closeMobileMenu} className="block mb-4 font-bold text-secondary">Iniciar Sesión</Link>
              )}
-             <Link href="/nosotros" className="block py-2 text-secondary">NOSOTROS</Link>
-             <Link href="/tienda" className="block py-2 text-secondary">TIENDA</Link>
-             <Link href="/contacto" className="block py-2 text-secondary">CONTACTO</Link>
+             
+             <Link href="/nosotros" onClick={closeMobileMenu} className="block py-2 text-secondary font-bold hover:text-primary transition">NOSOTROS</Link>
+             
+             {/* Productos con menú desplegable */}
+             <div>
+                <button 
+                    onClick={toggleMobileCategories}
+                    className="w-full flex items-center justify-between py-2 text-secondary font-bold hover:text-primary transition"
+                >
+                    <span>PRODUCTOS</span>
+                    <FaChevronRight className={`text-xs transition-transform ${isMobileCategoriesOpen ? 'rotate-90' : ''}`} />
+                </button>
+                
+                {isMobileCategoriesOpen && (
+                    <div className="ml-4 mt-2 space-y-2">
+                        {/* Link a todos los productos */}
+                        <Link 
+                            href="/productos" 
+                            onClick={closeMobileMenu}
+                            className="block py-2 text-sm text-gray-600 hover:text-primary transition"
+                        >
+                            Ver todos los productos
+                        </Link>
+                        
+                        {/* Categorías */}
+                        {categories.map((category) => (
+                            <div key={category.id}>
+                                <button
+                                    onClick={() => toggleMobileCategory(category.id)}
+                                    className="w-full flex items-center justify-between py-2 text-sm text-gray-700 font-semibold hover:text-primary transition"
+                                >
+                                    <span>{category.name}</span>
+                                    <FaChevronRight className={`text-xs transition-transform ${expandedMobileCategory === category.id ? 'rotate-90' : ''}`} />
+                                </button>
+                                
+                                {/* Subcategorías */}
+                                {expandedMobileCategory === category.id && category.subCategories && (
+                                    <div className="ml-4 mt-1 space-y-1">
+                                        {category.subCategories.map((subCategory) => (
+                                            <Link
+                                                key={subCategory.id}
+                                                href={`/productos?category=${category.slug}&subcategory=${subCategory.slug}`}
+                                                onClick={closeMobileMenu}
+                                                className="block py-2 text-sm text-gray-600 hover:text-primary transition hover:underline"
+                                            >
+                                                {subCategory.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+             </div>
+             
+             <Link href="/contacto" onClick={closeMobileMenu} className="block py-2 text-secondary font-bold hover:text-primary transition">CONTACTO</Link>
          </div>
       )}
     </header>

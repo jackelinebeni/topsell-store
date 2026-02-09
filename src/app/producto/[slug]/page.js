@@ -3,6 +3,15 @@ import ProductGallery from '@/components/ProductGallery';
 import ProductInfo from '@/components/ProductInfo';
 import ShopProductCard from '@/components/ShopProductCard';
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  
+  return {
+    title: product ? product.name : "Producto",
+  };
+}
+
 export default async function ProductDetailPage({ params }) {
   // Await params porque en Next.js 15 los params son asíncronos en server components
   const { slug } = await params; 
@@ -16,7 +25,7 @@ export default async function ProductDetailPage({ params }) {
         <div className="container mx-auto py-20 text-center">
             <h1 className="text-2xl font-bold text-gray-800">Producto no encontrado</h1>
             <p className="text-gray-500 mt-2">El producto &quot;{slug}&quot; no existe en nuestra base de datos.</p>
-            <a href="/tienda" className="text-primary underline mt-4 block">Volver a la tienda</a>
+            <a href="/productos" className="text-primary underline mt-4 block">Volver a la tienda</a>
         </div>
     );
   }
@@ -31,7 +40,7 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      <div className="container mx-auto max-w-[1800px] px-6 sm:px-8 lg:px-12 py-12">
+      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 py-12">
         
         {/* SECCIÓN SUPERIOR: GALERÍA + INFO */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
