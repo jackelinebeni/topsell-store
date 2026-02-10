@@ -6,6 +6,9 @@ import BrandCarousel from "@/components/BrandCarousel";
 import Header from "@/components/Header";
 import Footer  from "@/components/Footer";
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // Obtener banners, categorías, productos y marcas
   const [banners, categories, allProducts, brands] = await Promise.all([

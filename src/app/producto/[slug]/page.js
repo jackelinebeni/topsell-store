@@ -3,6 +3,9 @@ import ProductGallery from '@/components/ProductGallery';
 import ProductInfo from '@/components/ProductInfo';
 import ShopProductCard from '@/components/ShopProductCard';
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
