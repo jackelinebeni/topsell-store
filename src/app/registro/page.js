@@ -61,7 +61,7 @@ export default function RegistroPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 flex justify-center items-start font-sans">
+        <div className="min-h-screen bg-gray-50 py-12 px-[30px] flex justify-center items-start font-sans">
             <div className="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
 
                 <div className="text-center pt-10 pb-6 bg-secondary px-6">

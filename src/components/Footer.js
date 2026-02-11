@@ -6,12 +6,12 @@ export default function Footer() {
   return (
     // Aumenté el padding vertical (pt-24 pb-12) para dar más aire
     <footer className="bg-secondary text-gray-300 pt-24 pb-12 text-base">
-      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8">
-        
+      <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px]">
+
         {/* --- SECCIÓN SUPERIOR: SUSCRIPCIÓN --- */}
         {/* Aumenté el gap a 16 para separar más el logo del texto y del input */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-16 border-b border-gray-700">
-          
+
           {/* Logo en Caja Blanca (Ligeramente más grande) */}
           <div className="bg-white p-4 rounded w-56 h-20 flex items-center justify-center relative">
             <div className="relative w-full h-full">
@@ -46,7 +46,7 @@ export default function Footer() {
               className="w-full lg:w-80 px-6 py-4 text-gray-800 bg-white border-none focus:ring-2 focus:ring-primary outline-none text-base"
             />
             <button
-              type="button" 
+              type="button"
               // Botón más grande y fuente más visible
               className="bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 transition uppercase tracking-wider text-base"
             >
@@ -58,12 +58,10 @@ export default function Footer() {
         {/* --- SECCIÓN MEDIA: COLUMNAS --- */}
         {/* Aumenté el gap entre columnas (gap-12) y el padding vertical (py-16) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
-          
+
           {/* Columna 1: Contacto */}
           <div>
-            {/* Títulos de columna más grandes (text-xl) y más separación (mb-8) */}
             <h4 className="text-white font-bold mb-8 text-xl tracking-wide">Contacto</h4>
-            {/* Listas con texto base y mayor separación vertical (space-y-4) */}
             <ul className="space-y-4 text-base text-gray-400 leading-relaxed">
               <li>
                 <p>Lunes - Viernes: 9:00AM - 6:00PM</p>
@@ -72,14 +70,22 @@ export default function Footer() {
               <li className="hover:text-white transition cursor-pointer">ventas@topsell.com</li>
             </ul>
 
-            {/* Botones de WhatsApp un poco más grandes */}
-            <div className="flex gap-5 mt-8">
-              <div className="flex flex-col items-center gap-2 cursor-pointer group">
+            {/* Botón de WhatsApp con Número */}
+            <div className="flex flex-col gap-2 mt-6">
+              {/* Número de celular */}
+              <span className="text-gray-400 text-sm font-medium">+51 977 658 053</span>
+
+              <a
+                href="https://wa.me/51977658053?text=Hola%20TopSell,%20solicito%20información%20sobre..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-start gap-2 group w-max"
+              >
                 <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl group-hover:bg-green-600 transition shadow-md hover:scale-110 duration-300">
                   <FaWhatsapp />
                 </div>
                 <span className="text-sm text-gray-400 group-hover:text-white transition">Ventas</span>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -154,7 +160,7 @@ export default function Footer() {
               >
                 <FaTiktok />
               </a>
-            
+
             </div>
           </div>
         </div>

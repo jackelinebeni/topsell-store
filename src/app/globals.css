@@ -9,6 +9,7 @@
 /* Opcional: Estilo base para el body */
 body {
     background-color: #f9fafb;
+    zoom: 0.75;
 }
 
 .swiper-button-prev, .swiper-button-next {

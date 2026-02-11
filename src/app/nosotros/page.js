@@ -10,7 +10,7 @@ export default function NosotrosPage() {
     <main className="bg-white min-h-screen">
       
       {/* CONTENEDOR PRINCIPAL */}
-      <div className="container mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-20 space-y-32">
+      <div className="container mx-auto max-w-[1600px] px-[30px] sm:px-[38px] lg:px-[46px] py-20 space-y-32">
 
         {/* 1. SECCIÓN ¿QUIÉNES SOMOS? (Centrado) */}
         <section className="text-center flex flex-col items-center py-8">
@@ -26,7 +26,7 @@ export default function NosotrosPage() {
              />
           </div>
 
-          <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg md:text-xl text-justify px-4">
+          <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg md:text-xl text-justify px-[30px]">
             Corporación Topsell S.A.C. es un grupo corporativo que consolida la experiencia acumulada por más de 13 años en el rubro de iluminación, eléctricos y ferretería del equipo fundador Grupo Celux, dedicada a la importación y distribución mayorista de diversos productos con las marcas Celux, Stronglight y Bemlux. Y así mismo, sigue desarrollando nuevas propuestas que respondan a las necesidades del mercado, con atención cercana, transparencia y calidad.
           </p>
         </section>

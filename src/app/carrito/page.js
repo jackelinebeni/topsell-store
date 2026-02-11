@@ -78,7 +78,7 @@ export default function CarritoPage() {
   if (cart.length === 0) {
      // ... (Código de carrito vacío igual que antes) ...
      return (
-      <div className="container mx-auto py-20 text-center px-4 min-h-[50vh] flex flex-col justify-center items-center">
+      <div className="container mx-auto py-20 text-center px-[30px] min-h-[50vh] flex flex-col justify-center items-center">
         <h2 className="text-2xl font-bold text-secondary mb-4">Tu lista de cotización está vacía</h2>
         <Link href="/productos" className="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-black transition">
           Ir al catálogo
@@ -89,7 +89,7 @@ export default function CarritoPage() {
 
   return (
     <div className="bg-white min-h-screen font-sans py-12">
-      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px]">
         
         <h1 className="text-5xl font-extrabold text-secondary mb-8">Solicitud de Cotización</h1>
 

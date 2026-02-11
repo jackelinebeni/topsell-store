@@ -100,7 +100,7 @@ function TiendaContent() {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 py-12">
+      <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] py-12">
         
         {/* LAYOUT: Sidebar (Izquierda) - Contenido (Derecha) */}
         <div className="flex flex-col md:flex-row gap-12">

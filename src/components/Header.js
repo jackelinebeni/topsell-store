@@ -100,7 +100,7 @@ export default function Header() {
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100 font-sans">
-      <div className="container mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 relative">
+      <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] relative">
         {/* Contenedor principal flex */}
         <div className="flex justify-between items-center h-24 gap-4">
 
