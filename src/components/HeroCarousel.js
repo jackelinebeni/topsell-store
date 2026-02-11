@@ -19,37 +19,27 @@ export default function HeroCarousel({ banners }) {
   }
 
   return (
-    <div className="w-full h-[300px] md:h-[500px] relative">
+    <div className="w-full relative aspect-[1920/1090] max-h-[80vh]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         className="w-full h-full"
       >
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id} className="relative w-full h-full">
-            {/* Imagen optimizada de Next.js */}
+        {banners.map((banner, index) => (
+          <SwiperSlide key={banner.id || index} className="relative w-full h-full">
             <Image
               src={banner.imageUrl}
-              alt={banner.title || 'Banner'}
-              fill // Ocupa todo el contenedor
-              className="object-cover" // Recorta la imagen para llenar sin deformar
-              priority={banner.sortOrder === 1} // Carga la primera imagen rápido
-                unoptimized
+              alt="Banner promocional"
+              fill
+              className="object-cover"
+              priority={index === 0} // Prioriza la carga de la primera imagen
+              unoptimized // Mantener si las imágenes vienen de un CDN externo sin configuración de domains
             />
-            {/* Texto superpuesto (Opcional) */}
-            <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-white p-4">
-                <h2 className="text-4xl md:text-6xl font-bold mb-4">{banner.title}</h2>
-                {banner.targetUrl && (
-                    <a href={banner.targetUrl} className="bg-primary hover:bg-primary-hover text-white px-6 py-3 rounded-full font-semibold transition">
-                        Ver Oferta
-                    </a>
-                )}
-            </div>
           </SwiperSlide>
         ))}
       </Swiper>
