@@ -123,7 +123,7 @@ export default function Footer() {
                     src="/libro-reclamaciones.png"
                     alt="Libro de Reclamaciones"
                     fill
-                    className="object-contain"
+                    className="object-contain grayscale"
                   />
                 </div>
               </li>
@@ -154,12 +154,7 @@ export default function Footer() {
               >
                 <FaTiktok />
               </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
-              >
-                <FaWhatsapp />
-              </a>
+            
             </div>
           </div>
         </div>

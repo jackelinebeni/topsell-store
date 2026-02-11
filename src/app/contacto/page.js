@@ -261,7 +261,7 @@ function ContactForm() {
                 <textarea 
                   id="mensaje"
                   rows="4"
-                  placeholder="Escríbenos algo..."
+                  placeholder="Escribe aquí..."
                   value={formData.mensaje}
                   onChange={handleChange}
                   required

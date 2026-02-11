@@ -51,10 +51,10 @@ export default async function Home() {
           </section>
         )}
 
-        {/* PRODUCTOS VARIOS */}
+        {/* PRODUCTOS */}
         {productosVarios.length > 0 && (
           <section className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden py-8">
-            <ProductCarousel title="Productos Varios" products={productosVarios} />
+            <ProductCarousel title="Productos" products={productosVarios} />
           </section>
         )}
 
