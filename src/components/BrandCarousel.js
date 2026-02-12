@@ -10,7 +10,7 @@ export default function BrandCarousel({ brands }) {
 
   return (
     <div className="w-full">
-      <h2 className="text-center text-sm font-bold text-gray-400 mb-6 uppercase tracking-[0.2em]">
+      <h2 className="text-center text-2xl font-bold text-gray-400 mb-6 uppercase tracking-[0.2em]">
         Marcas Oficiales
       </h2>
       <Swiper

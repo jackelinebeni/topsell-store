@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     // Aumenté el padding vertical (pt-24 pb-12) para dar más aire
-    <footer className="bg-secondary text-gray-300 pt-24 pb-12 text-base">
+    <footer className="bg-secondary text-gray-300 pt-24 pb-12 text-xl">
       <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px]">
 
         {/* --- SECCIÓN SUPERIOR: SUSCRIPCIÓN --- */}
@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-16 border-b border-gray-700">
 
           {/* Logo en Caja Blanca (Ligeramente más grande) */}
-          <div className="bg-white p-4 rounded w-56 h-20 flex items-center justify-center relative">
+          <div className="bg-white p-1 rounded w-56 h-20 flex items-center justify-center relative">
             <div className="relative w-full h-full">
               <Image
                 src="/logo.png"
@@ -27,11 +27,11 @@ export default function Footer() {
           {/* Texto de Suscripción */}
           <div className="text-center lg:text-left max-w-lg">
             {/* Título más grande (text-2xl) y más margen inferior (mb-3) */}
-            <h3 className="text-white font-bold text-2xl mb-3">
+            <h3 className="text-white font-bold text-3xl mb-3">
               Suscríbete a nuestra página
             </h3>
             {/* Texto descriptivo más grande (text-base en lugar de text-sm) */}
-            <p className="text-gray-400 text-base leading-relaxed">
+            <p className="text-gray-400 text-xl leading-relaxed">
               Para enviarte a tu correo todas nuestras ofertas exclusivas y
               novedades.
             </p>
@@ -43,12 +43,12 @@ export default function Footer() {
               type="email"
               placeholder="Ingresa tu correo aquí..."
               // Inputs más altos (py-4) y texto más grande
-              className="w-full lg:w-80 px-6 py-4 text-gray-800 bg-white border-none focus:ring-2 focus:ring-primary outline-none text-base"
+              className="w-full lg:w-80 px-6 py-4 text-gray-800 bg-white border-none focus:ring-2 focus:ring-primary outline-none text-xl"
             />
             <button
               type="button"
               // Botón más grande y fuente más visible
-              className="bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 transition uppercase tracking-wider text-base"
+              className="bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 transition uppercase tracking-wider text-xl"
             >
               Suscribirse
             </button>
@@ -61,8 +61,8 @@ export default function Footer() {
 
           {/* Columna 1: Contacto */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-xl tracking-wide">Contacto</h4>
-            <ul className="space-y-4 text-base text-gray-400 leading-relaxed">
+            <h4 className="text-white font-bold mb-8 text-2xl tracking-wide">Contacto</h4>
+            <ul className="space-y-4 text-xl text-gray-400 leading-relaxed">
               <li>
                 <p>Lunes - Viernes: 9:00AM - 6:00PM</p>
                 <p>Sábado: 9:00AM - 2:00PM</p>
@@ -71,9 +71,9 @@ export default function Footer() {
             </ul>
 
             {/* Botón de WhatsApp con Número */}
-            <div className="flex flex-col gap-2 mt-6">
+            <div className="flex flex-col gap-2 mt-6 ">
               {/* Número de celular */}
-              <span className="text-gray-400 text-sm font-medium">+51 977 658 053</span>
+              <span className="text-gray-400 text-xl font-medium">+51 977 658 053</span>
 
               <a
                 href="https://wa.me/51977658053?text=Hola%20TopSell,%20solicito%20información%20sobre..."
@@ -81,35 +81,30 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex flex-col items-start gap-2 group w-max"
               >
-                <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl group-hover:bg-green-600 transition shadow-md hover:scale-110 duration-300">
+                <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl group-hover:bg-green-600 transition shadow-md hover:scale-110 duration-300">
                   <FaWhatsapp />
                 </div>
-                <span className="text-sm text-gray-400 group-hover:text-white transition">Ventas</span>
+                <span className="text-xl text-gray-400 group-hover:text-white transition">Ventas</span>
               </a>
             </div>
           </div>
 
           {/* Columna 2: Mi Cuenta */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-xl tracking-wide">Mi Cuenta</h4>
-            <ul className="space-y-5 text-base text-gray-400">
+            <h4 className="text-white font-bold mb-8 text-2xl tracking-wide">Mi Cuenta</h4>
+            <ul className="space-y-5 text-xl text-gray-400">
               <li>
-                <a href="#" className="hover:text-primary transition hover:pl-2 duration-200 block">
+                <a href="/nosotros" className="hover:text-primary transition hover:pl-2 duration-200 block">
                   Sobre Nosotros
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition hover:pl-2 duration-200 block">
-                  Libro de Reclamaciones
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition hover:pl-2 duration-200 block">
+                <a href="/terminos-condiciones" className="hover:text-primary transition hover:pl-2 duration-200 block">
                   Términos y Condiciones
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition hover:pl-2 duration-200 block">
+                <a href="/politica-privacidad" className="hover:text-primary transition hover:pl-2 duration-200 block">
                   Política y Privacidad
                 </a>
               </li>
@@ -118,10 +113,10 @@ export default function Footer() {
 
           {/* Columna 3: Más Información */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-xl tracking-wide">
+            <h4 className="text-white font-bold mb-8 text-2xl tracking-wide">
               Más Información
             </h4>
-            <ul className="space-y-6 text-base text-gray-400">
+            <ul className="space-y-6 text-xl text-gray-400">
               <li>
                 {/* Imagen del libro de reclamaciones un poco más grande */}
                 <div className="rounded p-2 inline-block w-40 h-24 relative bg-white hover:border-white transition cursor-pointer overflow-hidden shadow-md hover:shadow-xl transform hover:-translate-y-1 duration-300">
@@ -129,7 +124,7 @@ export default function Footer() {
                     src="/libro-reclamaciones.png"
                     alt="Libro de Reclamaciones"
                     fill
-                    className="object-contain grayscale"
+                    className="object-contain"
                   />
                 </div>
               </li>
@@ -138,25 +133,25 @@ export default function Footer() {
 
           {/* Columna 4: Redes Sociales */}
           <div>
-            <h4 className="text-white font-bold mb-8 text-xl tracking-wide">
+            <h4 className="text-white font-bold mb-8 text-2xl tracking-wide">
               Redes Sociales
             </h4>
             <div className="flex gap-6">
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
+                className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"
               >
                 <FaFacebookF />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
+                className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"
               >
                 <FaInstagram />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-white transition text-2xl hover:scale-110 duration-200"
+                className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"
               >
                 <FaTiktok />
               </a>
@@ -167,7 +162,7 @@ export default function Footer() {
 
         {/* --- SECCIÓN INFERIOR: COPYRIGHT --- */}
         <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-base text-gray-500">
+          <p className="text-xl text-gray-500">
             Topsell © 2025. Todos los Derechos Reservados
           </p>
         </div>

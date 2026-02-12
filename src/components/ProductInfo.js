@@ -24,54 +24,51 @@ export default function ProductInfo({ product }) {
 
   return (
     <div>
-      {/* Breadcrumb / Categoría */}
-      <p className="text-sm text-gray-500 mb-2 uppercase tracking-wide">
+      {/* Breadcrumb / Categoría - de text-sm a text-base */}
+      <p className="text-base text-gray-500 mb-2 uppercase tracking-wide">
         {product.category?.name || 'General'}
       </p>
 
-      {/* Título */}
-      <h1 className="text-3xl font-extrabold text-secondary mb-2">
+      {/* Título - de text-3xl a text-5xl */}
+      <h1 className="text-5xl font-extrabold text-secondary mb-4">
         {product.name}
       </h1>
 
-      {/* SKU (Simulado por ahora si no está en BD) */}
-      <p className="text-xs text-gray-400 mb-6">SKU: {product.id}9871235</p>
-
-      {/* Descripción Corta */}
-      <div className="text-gray-600 text-sm leading-relaxed mb-6">
+      {/* Descripción Corta - de text-sm a text-base */}
+      <div className="text-gray-600 text-base leading-relaxed mb-6">
         {product.shortDescription || product.description}
       </div>
 
-      {/* Descripción Larga */}
+      {/* Descripción Larga - de text-sm a text-base */}
       {product.longDescription && (
-        <div className="text-gray-600 text-sm leading-relaxed mb-6">
+        <div className="text-gray-600 text-base leading-relaxed mb-6">
           {product.longDescription}
         </div>
       )}
 
-      {/* Características (Dinámico) */}
+      {/* Características - de text-sm a text-base */}
       {product.features && product.features.length > 0 && (
-        <ul className="list-disc list-inside text-sm text-gray-600 mb-8 space-y-1">
+        <ul className="list-disc list-inside text-base text-gray-600 mb-8 space-y-2">
           {product.features.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}
         </ul>
       )}
 
-      {/* Fila de Acción: Cantidad + Botón Cotizar */}
+      {/* Fila de Acción */}
       <div className="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-gray-100">
         
-        {/* Selector Cantidad */}
-        <div className="flex items-center border border-gray-300 rounded">
-            <button onClick={handleDecrease} className="px-4 py-2 text-gray-600 hover:bg-gray-100 transition">-</button>
-            <span className="px-4 py-2 font-bold text-secondary min-w-[40px] text-center">{quantity}</span>
-            <button onClick={handleIncrease} className="px-4 py-2 text-gray-600 hover:bg-gray-100 transition">+</button>
+        {/* Selector Cantidad - botones y texto más grandes */}
+        <div className="flex items-center border border-gray-300 rounded text-lg">
+            <button onClick={handleDecrease} className="px-5 py-3 text-gray-600 hover:bg-gray-100 transition">-</button>
+            <span className="px-5 py-3 font-bold text-secondary min-w-[50px] text-center">{quantity}</span>
+            <button onClick={handleIncrease} className="px-5 py-3 text-gray-600 hover:bg-gray-100 transition">+</button>
         </div>
 
-        {/* Botón Cotizar CONECTADO */}
+        {/* Botón Cotizar - de text-base (por defecto) a text-xl */}
         <button 
             onClick={handleAddToCart}
-            className={`flex-grow font-bold py-3 px-8 rounded transition uppercase tracking-wide shadow-md 
+            className={`flex-grow font-bold py-4 px-10 rounded transition uppercase tracking-wide shadow-md text-xl
                 ${added ? 'bg-green-600 text-white' : 'bg-primary hover:bg-primary-hover text-white'}
             `}
         >

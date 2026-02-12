@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
           {product.category?.name || 'General'}
         </p>
         
-        <h3 className="text-secondary font-bold text-sm line-clamp-2 min-h-[40px] mb-4">
+        <h3 className="text-secondary font-bold text-xl line-clamp-2 min-h-[40px] mb-4">
           {product.name}
         </h3>
 
