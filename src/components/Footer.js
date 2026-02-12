@@ -119,7 +119,7 @@ export default function Footer() {
             <ul className="space-y-6 text-xl text-gray-400">
               <li>
                 {/* Imagen del libro de reclamaciones un poco más grande */}
-                <div className="rounded p-2 inline-block w-40 h-24 relative bg-white hover:border-white transition cursor-pointer overflow-hidden shadow-md hover:shadow-xl transform hover:-translate-y-1 duration-300">
+                <div className="rounded p-2 inline-block w-40 h-50 relative hover:border-white transition cursor-pointer overflow-hidden shadow-md hover:shadow-xl transform hover:-translate-y-1 duration-300">
                   <Image
                     src="/libro-reclamaciones.png"
                     alt="Libro de Reclamaciones"
