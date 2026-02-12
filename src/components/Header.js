@@ -288,7 +288,55 @@ export default function Header() {
 
           {/* 4. VENTANA DEL CARRITO (MEJORA DE TAMAÑO) */}
           <div className="flex items-center gap-6 z-20">
-            {/* ... parte de Auth omitida para brevedad pero se mantiene igual ... */}
+            {user ? (
+              <div className="relative hidden md:block">
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  onBlur={() => setTimeout(() => setIsUserMenuOpen(false), 200)}
+                  className="flex items-center gap-2 text-lg font-bold text-secondary hover:text-primary transition focus:outline-none"
+                >
+                  <FaUserCircle className="text-xl" />
+
+                  <span className="truncate max-w-[100px]">
+                    Hola, {user.firstName || user.nombres}
+                  </span>
+
+                  <FaChevronRight
+                    className={`text-xs transition-transform ${isUserMenuOpen ? "rotate-90" : ""}`}
+                  />
+                </button>
+
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 top-full mt-3 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="px-4 py-3 border-b border-gray-50 bg-gray-50">
+                      <p className="text-xs text-gray-500">Conectado como</p>
+
+                      <p className="text-xs font-bold text-secondary truncate">
+                        {user.email}
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={logout}
+                      className="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2 transition"
+                    >
+                      <FaSignOutAlt /> Cerrar Sesión
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:flex items-center gap-2 text-sm font-bold text-secondary hover:text-primary transition"
+              >
+                <FaUser className="text-lg" />
+
+                <span>Iniciar Sesión</span>
+              </Link>
+            )}
+
+            <div className="hidden md:block h-6 w-px bg-gray-200"></div>
 
             <div className="relative">
               <button
