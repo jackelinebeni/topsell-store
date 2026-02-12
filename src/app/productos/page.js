@@ -13,11 +13,9 @@ function TiendaContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const PRODUCTS_PER_PAGE = 12;
 
-  // Derivar estados de los parámetros de URL
   const selectedCategory = useMemo(() => searchParams.get('category'), [searchParams]);
   const selectedSubCategory = useMemo(() => searchParams.get('subcategory'), [searchParams]);
 
-  // Carga inicial de datos
   useEffect(() => {
     const fetchData = async () => {
       const [catsData, prodsData] = await Promise.all([
@@ -30,38 +28,28 @@ function TiendaContent() {
     fetchData();
   }, []);
 
-  // Calcular productos filtrados usando useMemo
   const filteredProducts = useMemo(() => {
     let filtered = allProducts;
-    
-    // Filtrar por subcategoría (tiene prioridad si está seleccionada)
     if (selectedSubCategory) {
       filtered = filtered.filter(p => p.subCategory?.slug === selectedSubCategory);
     } 
-    // Filtrar por categoría (muestra todos los productos de esa categoría, incluidas sus subcategorías)
     else if (selectedCategory) {
       filtered = filtered.filter(p => p.category?.slug === selectedCategory);
     }
-    
     return filtered;
   }, [selectedCategory, selectedSubCategory, allProducts]);
 
-  // Calcular páginas
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
-  
-  // Ajustar página actual si está fuera de rango
   const validCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
   const startIndex = (validCurrentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
-  // Limpiar filtros
   const handleClearFilters = () => {
     setCurrentPage(1);
     router.push('/productos');
   };
 
-  // Manejar selección de categoría
   const handleSelectCategory = (slug) => {
     setCurrentPage(1);
     const params = new URLSearchParams();
@@ -69,14 +57,11 @@ function TiendaContent() {
     router.push(`/productos?${params.toString()}`);
   };
 
-  // Manejar selección de subcategoría
   const handleSelectSubCategory = (slug) => {
     setCurrentPage(1);
-    // Encontrar la categoría padre
     const parentCategory = categories.find(cat => 
       cat.subCategories?.some(sub => sub.slug === slug)
     );
-    
     const params = new URLSearchParams();
     if (parentCategory) {
       params.set('category', parentCategory.slug);
@@ -85,7 +70,6 @@ function TiendaContent() {
     router.push(`/productos?${params.toString()}`);
   };
 
-  // Navegación de páginas
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
@@ -101,11 +85,8 @@ function TiendaContent() {
   return (
     <div className="bg-white min-h-screen font-sans">
       <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] py-12">
-        
-        {/* LAYOUT: Sidebar (Izquierda) - Contenido (Derecha) */}
         <div className="flex flex-col md:flex-row gap-12">
           
-          {/* 1. BARRA LATERAL */}
           <ShopSidebar 
             categories={categories} 
             selectedCategory={selectedCategory}
@@ -115,16 +96,12 @@ function TiendaContent() {
             onClearFilters={handleClearFilters}
           />
 
-          {/* 2. CONTENIDO PRINCIPAL */}
           <div className="flex-grow">
-            
-            {/* Cabecera Móvil (Solo visible en pantallas pequeñas) */}
+            {/* Cabecera Móvil: Aumentada de text-sm a text-base */}
             <div className="md:hidden mb-6 flex justify-between items-center">
-                <span className="text-sm text-gray-500">{filteredProducts.length} Productos</span>
-                {/* Aquí podría ir un botón de "Filtrar" móvil */}
+                <span className="text-base text-gray-500 font-medium">{filteredProducts.length} Productos</span>
             </div>
 
-            {/* GRILLA DE PRODUCTOS */}
             {currentProducts.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
                     {currentProducts.map((product) => (
@@ -132,70 +109,71 @@ function TiendaContent() {
                     ))}
                 </div>
             ) : (
-                <div className="text-center py-20 bg-gray-50 rounded-lg">
-                    <p className="text-gray-500">No se encontraron productos en esta categoría.</p>
-                    <button onClick={handleClearFilters} className="text-primary mt-2 font-bold hover:underline">
+                <div className="text-center py-24 bg-gray-50 rounded-2xl">
+                    {/* Texto de no resultados aumentado a text-xl */}
+                    <p className="text-gray-500 text-xl">No se encontraron productos en esta categoría.</p>
+                    <button onClick={handleClearFilters} className="text-primary mt-4 text-lg font-bold hover:underline">
                         Ver todos los productos
                     </button>
                 </div>
             )}
 
-            {/* PAGINACIÓN */}
+            {/* PAGINACIÓN: El contenedor ya tenía text-lg, los botones internos se benefician de ello */}
             {filteredProducts.length > 0 && (
-              <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-base font-medium">
+              <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xl font-medium">
                   <span className="text-gray-500">
                       Mostrando {startIndex + 1}–{Math.min(endIndex, filteredProducts.length)} de {filteredProducts.length} Productos
                   </span>
                   
                   {totalPages > 1 && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                         <button 
                           onClick={handlePrevPage}
                           disabled={validCurrentPage === 1}
-                          className="text-gray-800 hover:text-primary px-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
-                          Prev
+                          Anterior
                         </button>
                         
-                        {[...Array(totalPages)].map((_, index) => {
-                          const page = index + 1;
-                          // Mostrar solo páginas cercanas a la actual
-                          if (
-                            page === 1 || 
-                            page === totalPages || 
-                            (page >= validCurrentPage - 1 && page <= validCurrentPage + 1)
-                          ) {
-                            return (
-                              <button
-                                key={page}
-                                onClick={() => handlePageClick(page)}
-                                className={`w-8 h-8 flex items-center justify-center border transition ${
-                                  validCurrentPage === page
-                                    ? 'border-primary text-primary font-bold'
-                                    : 'border-transparent text-gray-500 hover:border-gray-200'
-                                }`}
-                              >
-                                {page}
-                              </button>
-                            );
-                          } else if (page === validCurrentPage - 2 || page === validCurrentPage + 2) {
-                            return <span key={page} className="text-gray-400">…</span>;
-                          }
-                          return null;
-                        })}
+                        <div className="flex items-center gap-1">
+                          {[...Array(totalPages)].map((_, index) => {
+                            const page = index + 1;
+                            if (
+                              page === 1 || 
+                              page === totalPages || 
+                              (page >= validCurrentPage - 1 && page <= validCurrentPage + 1)
+                            ) {
+                              return (
+                                <button
+                                  key={page}
+                                  onClick={() => handlePageClick(page)}
+                                  className={`w-10 h-10 flex items-center justify-center border-2 rounded-lg transition ${
+                                    validCurrentPage === page
+                                      ? 'border-primary text-primary font-bold bg-primary/5'
+                                      : 'border-transparent text-gray-500 hover:border-gray-200'
+                                  }`}
+                                >
+                                  {page}
+                                </button>
+                              );
+                            } else if (page === validCurrentPage - 2 || page === validCurrentPage + 2) {
+                              return <span key={page} className="text-gray-400 px-1">...</span>;
+                            }
+                            return null;
+                          })}
+                        </div>
                         
                         <button 
                           onClick={handleNextPage}
                           disabled={validCurrentPage === totalPages}
-                          className="text-gray-800 hover:text-primary px-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
-                          Next
+                          Siguiente
                         </button>
                     </div>
                   )}
               </div>
             )}
-
           </div>
         </div>
       </div>
@@ -208,8 +186,9 @@ export default function TiendaPage() {
     <Suspense fallback={
       <div className="bg-white min-h-screen font-sans flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-          <p className="mt-4 text-gray-500">Cargando productos...</p>
+          <div className="inline-block animate-spin rounded-full h-14 w-14 border-b-2 border-primary"></div>
+          {/* Loader text aumentado de text-gray-500 a text-lg */}
+          <p className="mt-6 text-lg text-gray-600 font-medium">Cargando catálogo de productos...</p>
         </div>
       </div>
     }>
