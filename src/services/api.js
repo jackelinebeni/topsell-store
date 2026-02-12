@@ -78,7 +78,7 @@ export const searchProducts = async (query) => {
 
 export const submitContact = async (contactData) => {
   try {
-    const response = await axios.post(`${API_URL}/contact`, contactData);
+    const response = await axios.post(`${API_URL}/contacts`, contactData);
     return { success: true, data: response.data };
   } catch (error) {
     console.error("Error al enviar formulario de contacto:", error);
