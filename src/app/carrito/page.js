@@ -7,6 +7,9 @@ import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext'; // Importar AuthContext
 import { FaArrowLeft, FaTrash, FaCheckCircle, FaSpinner } from 'react-icons/fa'; // Iconos nuevos
 
+// URL de tu Backend Spring Boot (desde variable de entorno)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+
 export default function CarritoPage() {
   const { cart, updateQuantity, removeFromCart, clearCart, totalItems } = useCart();
   const { user, token } = useAuth(); // Necesitamos el token para enviar la petición
@@ -36,7 +39,7 @@ export default function CarritoPage() {
         };
 
         // 3. Llamada al Backend
-        const response = await fetch('http://localhost:8080/api/quotes/send', {
+        const response = await fetch(`${API_URL}/quotes/send`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
