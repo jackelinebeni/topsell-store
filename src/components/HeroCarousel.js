@@ -19,7 +19,7 @@ export default function HeroCarousel({ banners }) {
   }
 
   return (
-    <div className="w-full relative aspect-[1920/1090] max-h-[80vh]">
+    <div className="w-full relative aspect-[1920/1080] max-h-[100vh]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}

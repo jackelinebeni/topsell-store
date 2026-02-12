@@ -32,7 +32,7 @@ export default async function Home() {
     <main className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
       {/* CONTENEDOR CENTRAL */}
-      <div className="flex-grow w-full max-w-[1800px] mx-auto px-[30px] sm:px-[38px] lg:px-[46px] py-10 space-y-16">
+      <div className="flex-grow w-full max-w-[2000px] mx-auto px-[30px] sm:px-[38px] lg:px-[46px] py-10 space-y-16">
         
         {/* HERO SECTION */}
         <section className="w-full rounded-2xl overflow-hidden shadow-lg">
