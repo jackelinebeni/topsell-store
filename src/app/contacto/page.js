@@ -132,7 +132,7 @@ function ContactForm() {
           {/* --- COLUMNA DERECHA --- */}
           <div className="md:pl-8">
             <h2 className="text-6xl font-extrabold text-primary mb-4">Hablemos</h2>
-            <p className="text-gray-500 text-lg mb-8 leading-relaxed">
+            <p className="text-gray-500 text-2xl mb-8 leading-relaxed">
               Déjanos saber tu consulta y te brindaremos una respuesta a la brevedad.
             </p>
             

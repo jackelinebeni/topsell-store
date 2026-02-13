@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-family: 'Poppins', sans-serif;
   --color-primary: #E31E24;
   --color-primary-hover: #bf1a1f;
   --color-secondary: #1D1D1B;
@@ -8,6 +9,7 @@
 
 /* Opcional: Estilo base para el body */
 body {
+    font-family: var(--font-family);
     background-color: #f9fafb;
     zoom: 0.75;
 }

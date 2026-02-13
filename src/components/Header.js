@@ -263,10 +263,10 @@ export default function Header() {
                         </div>
                         <div className="min-w-0 flex-1">
                           {/* Título: text-lg -> text-xl */}
-                          <p className="text-xl font-extrabold text-secondary truncate mb-1">
+                          <p className="text-xl font-semibold text-secondary truncate mb-1">
                             {product.name}
                           </p>
-                          <p className="text-sm text-primary uppercase font-bold tracking-widest">
+                          <p className="text-sm text-primary uppercase font-semibold tracking-widest">
                             {product.category?.name || "Producto"}
                           </p>
                         </div>

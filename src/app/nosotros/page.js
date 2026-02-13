@@ -119,8 +119,8 @@ function ValueCard({ icon, title, desc }) {
       <div className="text-4xl text-secondary mb-5 border-2 border-secondary rounded-full p-4 bg-white shadow-sm">
         {icon}
       </div>
-      <h3 className="font-extrabold text-secondary mb-3 text-xl">{title}</h3>
-      <p className="text-sm text-gray-600 leading-relaxed">
+      <h3 className="font-extrabold text-secondary mb-3 text-2xl">{title}</h3>
+      <p className="text-xl text-gray-600 leading-relaxed">
         {desc}
       </p>
     </div>

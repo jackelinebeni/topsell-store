@@ -25,7 +25,7 @@ export default function ProductInfo({ product }) {
   return (
     <div>
       {/* Breadcrumb / Categoría - de text-sm a text-base */}
-      <p className="text-base text-gray-500 mb-2 uppercase tracking-wide">
+      <p className="text-xl text-gray-500 mb-2 uppercase tracking-wide">
         {product.category?.name || 'General'}
       </p>
 
@@ -41,7 +41,7 @@ export default function ProductInfo({ product }) {
 
       {/* Descripción Larga - de text-sm a text-base */}
       {product.longDescription && (
-        <div className="text-gray-600 text-base leading-relaxed mb-6">
+        <div className="text-gray-600 text-xl leading-relaxed mb-6">
           {product.longDescription}
         </div>
       )}
