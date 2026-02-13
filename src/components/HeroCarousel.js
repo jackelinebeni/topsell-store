@@ -1,4 +1,4 @@
-'use client'; // Obligatorio para Swiper en Next.js App Router
+'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -10,16 +10,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function HeroCarousel({ banners }) {
-  // CORRECCIÓN AQUÍ:
-  // Verificamos si banners existe Y si es un Array real.
   if (!banners || !Array.isArray(banners) || banners.length === 0) {
-    // Opcional: Renderiza un div vacío o un mensaje de depuración temporal
     console.warn("HeroCarousel recibió datos inválidos:", banners); 
     return null;
   }
 
   return (
-    <div className="w-full relative aspect-[1920/1080] max-h-[100vh]">
+    /* Cambiamos aspect-[1920/1080] a aspect-video o el ratio original de tus banners.
+       Esto asegura que el contenedor SIEMPRE tenga la forma de la imagen.
+    */
+    <div className="w-full relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[1920/800] bg-gray-100 overflow-hidden">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
@@ -28,7 +28,7 @@ export default function HeroCarousel({ banners }) {
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
-        className="w-full h-full"
+        className="w-full h-full custom-swiper-large"
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={banner.id || index} className="relative w-full h-full">
@@ -36,13 +36,45 @@ export default function HeroCarousel({ banners }) {
               src={banner.imageUrl}
               alt="Banner promocional"
               fill
-              className="object-cover"
-              priority={index === 0} // Prioriza la carga de la primera imagen
-              unoptimized // Mantener si las imágenes vienen de un CDN externo sin configuración de domains
+              /* CAMBIO CLAVE: object-contain asegura que la imagen se achique 
+                 dentro del espacio disponible sin ser recortada.
+              */
+              className="object-contain" 
+              priority={index === 0}
+              unoptimized
             />
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Estilos para agrandar las flechas y puntos (Coherencia visual) */}
+      <style jsx global>{`
+        .custom-swiper-large .swiper-button-next,
+        .custom-swiper-large .swiper-button-prev {
+          color: #000;
+          background: rgba(255, 255, 255, 0.8);
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+        .custom-swiper-large .swiper-button-next:after,
+        .custom-swiper-large .swiper-button-prev:after {
+          font-size: 24px;
+          font-weight: bold;
+        }
+        .custom-swiper-large .swiper-pagination-bullet {
+          width: 14px;
+          height: 14px;
+          background: #000;
+          opacity: 0.3;
+        }
+        .custom-swiper-large .swiper-pagination-bullet-active {
+          opacity: 1;
+          background: var(--primary, #000);
+          width: 30px;
+          border-radius: 10px;
+        }
+      `}</style>
     </div>
   );
 }

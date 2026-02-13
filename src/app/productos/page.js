@@ -85,7 +85,8 @@ function TiendaContent() {
   return (
     <div className="bg-white min-h-screen font-sans">
       <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] py-12">
-        <div className="flex flex-col md:flex-row gap-12">
+        {/* GAP aumentado de 12 a 16 para dar más aire al sidebar grande */}
+        <div className="flex flex-col md:flex-row gap-16">
           
           <ShopSidebar 
             categories={categories} 
@@ -97,45 +98,45 @@ function TiendaContent() {
           />
 
           <div className="flex-grow">
-            {/* Cabecera Móvil: Aumentada de text-sm a text-base */}
-            <div className="md:hidden mb-6 flex justify-between items-center">
-                <span className="text-base text-gray-500 font-medium">{filteredProducts.length} Productos</span>
+            {/* Cabecera Móvil: Aumentada a text-lg */}
+            <div className="md:hidden mb-8 flex justify-between items-center">
+                <span className="text-lg text-gray-500 font-semibold">{filteredProducts.length} Productos</span>
             </div>
 
             {currentProducts.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-14">
                     {currentProducts.map((product) => (
                         <ShopProductCard key={product.id} product={product} />
                     ))}
                 </div>
             ) : (
-                <div className="text-center py-24 bg-gray-50 rounded-2xl">
-                    {/* Texto de no resultados aumentado a text-xl */}
-                    <p className="text-gray-500 text-xl">No se encontraron productos en esta categoría.</p>
-                    <button onClick={handleClearFilters} className="text-primary mt-4 text-lg font-bold hover:underline">
+                <div className="text-center py-32 bg-gray-50 rounded-[2rem]">
+                    {/* Texto de no resultados aumentado a text-2xl */}
+                    <p className="text-gray-500 text-2xl font-medium">No se encontraron productos.</p>
+                    <button onClick={handleClearFilters} className="text-primary mt-6 text-xl font-bold hover:underline decoration-2">
                         Ver todos los productos
                     </button>
                 </div>
             )}
 
-            {/* PAGINACIÓN: El contenedor ya tenía text-lg, los botones internos se benefician de ello */}
+            {/* PAGINACIÓN: Aumentada a text-xl / text-2xl */}
             {filteredProducts.length > 0 && (
-              <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xl font-medium">
+              <div className="mt-20 pt-10 border-t-2 border-gray-100 flex flex-col xl:flex-row justify-between items-center gap-8 text-xl font-semibold">
                   <span className="text-gray-500">
                       Mostrando {startIndex + 1}–{Math.min(endIndex, filteredProducts.length)} de {filteredProducts.length} Productos
                   </span>
                   
                   {totalPages > 1 && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-5">
                         <button 
                           onClick={handlePrevPage}
                           disabled={validCurrentPage === 1}
-                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                          className="text-gray-800 hover:text-primary px-4 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
                           Anterior
                         </button>
                         
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2">
                           {[...Array(totalPages)].map((_, index) => {
                             const page = index + 1;
                             if (
@@ -147,7 +148,7 @@ function TiendaContent() {
                                 <button
                                   key={page}
                                   onClick={() => handlePageClick(page)}
-                                  className={`w-10 h-10 flex items-center justify-center border-2 rounded-lg transition ${
+                                  className={`w-12 h-12 flex items-center justify-center border-2 rounded-xl text-lg transition ${
                                     validCurrentPage === page
                                       ? 'border-primary text-primary font-bold bg-primary/5'
                                       : 'border-transparent text-gray-500 hover:border-gray-200'
@@ -157,7 +158,7 @@ function TiendaContent() {
                                 </button>
                               );
                             } else if (page === validCurrentPage - 2 || page === validCurrentPage + 2) {
-                              return <span key={page} className="text-gray-400 px-1">...</span>;
+                              return <span key={page} className="text-gray-400 px-2">...</span>;
                             }
                             return null;
                           })}
@@ -166,7 +167,7 @@ function TiendaContent() {
                         <button 
                           onClick={handleNextPage}
                           disabled={validCurrentPage === totalPages}
-                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                          className="text-gray-800 hover:text-primary px-4 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                         >
                           Siguiente
                         </button>
@@ -186,9 +187,9 @@ export default function TiendaPage() {
     <Suspense fallback={
       <div className="bg-white min-h-screen font-sans flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-14 w-14 border-b-2 border-primary"></div>
-          {/* Loader text aumentado de text-gray-500 a text-lg */}
-          <p className="mt-6 text-lg text-gray-600 font-medium">Cargando catálogo de productos...</p>
+          <div className="inline-block animate-spin rounded-full h-20 w-20 border-b-4 border-primary"></div>
+          {/* Loader text aumentado a text-2xl */}
+          <p className="mt-8 text-2xl text-gray-700 font-bold tracking-tight">Cargando catálogo...</p>
         </div>
       </div>
     }>
