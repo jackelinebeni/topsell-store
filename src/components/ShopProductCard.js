@@ -30,12 +30,12 @@ export default function ShopProductCard({ product }) {
       {/* Info (SIN PRECIO) */}
       <div className="space-y-3 w-full px-2">
         {/* Categoría - Subido de text-[10px] a text-xs */}
-        <p className="text-base text-gray-400 uppercase tracking-widest font-semibold">
+        <p className="text-lg text-gray-400 uppercase tracking-widest font-semibold">
           {product.category?.name || "General"}
         </p>
 
         {/* Nombre del producto - Subido de text-sm (14px) a text-base (16px) */}
-        <h3 className="text-gray-800 font-semibold text-xl line-clamp-2 min-h-[48px] leading-snug group-hover:text-primary transition-colors">
+        <h3 className="text-gray-800 font-semibold text-2xl line-clamp-2 min-h-[48px] leading-snug group-hover:text-primary transition-colors">
           {product.name}
         </h3>
 

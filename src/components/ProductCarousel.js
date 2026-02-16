@@ -80,11 +80,11 @@ export default function ProductCarousel({ title, products }) {
                 {/* Info */}
                 <div className="flex-grow w-full">
                     {/* Categoría aumentada de 11px/xs a xs/sm */}
-                    <span className="inline-block px-2 py-1 bg-gray-100 text-xs sm:text-sm font-medium text-gray-500 rounded-md mb-2">
+                    <span className="inline-block px-2 py-1 bg-gray-100 text-lg sm:text-sm font-medium text-gray-500 rounded-md mb-2">
                       {product.category?.name || 'General'}
                     </span>
                     {/* Nombre aumentado de xs/base/lg a sm/lg/xl */}
-                    <h3 className="font-bold text-secondary text-sm sm:text-lg md:text-xl mb-1 sm:mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-secondary text-lg sm:text-lg md:text-xl mb-1 sm:mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors">
                       {product.name}
                     </h3>
                     {/* Descripción aumentada de 11px/xs/sm a xs/sm/base */}

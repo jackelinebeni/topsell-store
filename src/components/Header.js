@@ -459,7 +459,7 @@ export default function Header() {
             <Link
               href="/login"
               onClick={closeMobileMenu}
-              className="block mb-4 font-bold text-secondary"
+              className="block mb-4 font-bold text-xl"
             >
               Iniciar Sesión
             </Link>

@@ -34,15 +34,10 @@ export default function ProductInfo({ product }) {
         {product.name}
       </h1>
 
-      {/* Descripción Corta - de text-sm a text-base */}
-      <div className="text-gray-600 text-base leading-relaxed mb-6">
-        {product.shortDescription || product.description}
-      </div>
-
-      {/* Descripción Larga - de text-sm a text-base */}
-      {product.longDescription && (
+      {/* SKU - de text-sm a text-base */}
+      {product.sku && (
         <div className="text-gray-600 text-xl leading-relaxed mb-6">
-          {product.longDescription}
+          <span className="font-bold">SKU:</span> {product.sku}
         </div>
       )}
 

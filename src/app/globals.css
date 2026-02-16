@@ -23,3 +23,16 @@ body {
 .swiper-pagination-bullet-active {
     background-color: var(--color-primary) !important;
 }
+
+.product-carousel h3 {
+    font-size: 1.5rem !important; /* Ajusta a tu gusto */
+  }
+  .product-carousel .inline-block {
+    font-size: 1.5rem !important; /* Ajusta a tu gusto */
+  }
+
+  @media (min-width: 640px) {
+    .product-carousel h3 {
+      font-size: 1.75rem !important;
+    }
+  }
