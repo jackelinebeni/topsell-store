@@ -28,14 +28,14 @@ body {
     font-size: 1.5rem !important; /* Ajusta a tu gusto */
   }
   .product-carousel .inline-block {
-    font-size: 1.5rem !important; /* Ajusta a tu gusto */
+    font-size: 1.25rem !important; /* Ajusta a tu gusto */
   }
 
   @media (min-width: 640px) {
     .product-carousel h3 {
-      font-size: 1.75rem !important;
+      font-size: 1.5rem !important;
     }
     .sm\:text-base{
-      font-size: 1.75rem !important;
+      font-size: 1.5rem !important;
     }
   }

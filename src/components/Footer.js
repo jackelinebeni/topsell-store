@@ -192,7 +192,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-xl text-gray-500">Topsell © 2025. Todos los Derechos Reservados</p>
+          <p className="text-xl text-gray-500">Topsell © 2026. Todos los Derechos Reservados</p>
         </div>
       </div>
     </footer>
