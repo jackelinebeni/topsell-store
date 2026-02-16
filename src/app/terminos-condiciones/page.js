@@ -8,12 +8,13 @@ export default function TerminosCondiciones() {
         {/* Encabezado */}
         <header className="mb-16 border-b-2 border-primary pb-8">
           <h1 className="text-5xl font-black uppercase tracking-tighter mb-4 text-secondary">
-            Términos y Condiciones
+            TÉRMINOS Y CONDICIONES
           </h1>
           <p className="text-xl font-bold text-gray-600">Corporación Topsell S.A.C.</p>
         </header>
 
         <div className="space-y-12">
+          {/* 1. Objeto del sitio web */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">1. Objeto del sitio web</h2>
             <p className="text-xl leading-relaxed">
@@ -24,6 +25,7 @@ export default function TerminosCondiciones() {
             </p>
           </section>
 
+          {/* 2. Uso del sitio */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">2. Uso del sitio</h2>
             <p className="text-xl mb-4">El usuario se compromete a:</p>
@@ -37,6 +39,7 @@ export default function TerminosCondiciones() {
             </p>
           </section>
 
+          {/* 3. Solicitudes de cotización */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">3. Solicitudes de cotización</h2>
             <ul className="list-disc list-inside space-y-3 text-xl pl-4">
@@ -46,29 +49,35 @@ export default function TerminosCondiciones() {
             </ul>
           </section>
 
+          {/* 4. Precios, promociones y disponibilidad */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">4. Precios, promociones y disponibilidad</h2>
             <ul className="list-disc list-inside space-y-3 text-xl pl-4">
               <li>Corporación Topsell S.A.C. se reserva el derecho de modificar precios, promociones, condiciones comerciales y disponibilidad de productos en cualquier momento y sin previo aviso.</li>
-              <li>La información publicada en este sitio web es válida únicamente dentro de esta plataforma y no aplica necesariamente a otros medios.</li>
+              <li>La información publicada en este sitio web es válida únicamente dentro de esta plataforma y no aplica necesariamente a otros medios, como redes sociales, catálogos impresos, marketplaces u otros canales de venta.</li>
               <li>Las imágenes y descripciones de los productos son referenciales y pueden presentar variaciones.</li>
             </ul>
           </section>
 
+          {/* 5. Propiedad intelectual */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">5. Propiedad intelectual</h2>
             <p className="text-xl leading-relaxed">
-              Todos los contenidos del sitio web, incluyendo textos, imágenes, logotipos, marcas, diseños y material gráfico, son propiedad de Corporación Topsell S.A.C. o se utilizan con autorización. Queda prohibida su reproducción total o parcial sin autorización expresa.
+              Todos los contenidos del sitio web, incluyendo textos, imágenes, logotipos, marcas, diseños y material gráfico, son propiedad de Corporación Topsell S.A.C. o se utilizan con autorización.<br />
+              Queda prohibida su reproducción total o parcial sin autorización expresa.
             </p>
           </section>
 
+          {/* 6. Responsabilidad */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">6. Responsabilidad</h2>
             <p className="text-xl leading-relaxed">
-              Corporación Topsell S.A.C. no garantiza que el sitio web esté libre de errores, interrupciones o fallas técnicas, ni se hace responsable por daños derivados del uso de la información publicada. El uso del sitio se realiza bajo responsabilidad del usuario.
+              Corporación Topsell S.A.C. no garantiza que el sitio web esté libre de errores, interrupciones o fallas técnicas, ni se hace responsable por daños derivados del uso de la información publicada.<br />
+              El uso del sitio se realiza bajo responsabilidad del usuario.
             </p>
           </section>
 
+          {/* 7. Enlaces externos */}
           <section>
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">7. Enlaces externos</h2>
             <p className="text-xl leading-relaxed">
@@ -76,6 +85,7 @@ export default function TerminosCondiciones() {
             </p>
           </section>
 
+          {/* 8. Legislación aplicable */}
           <section className="pt-8 border-t border-gray-100">
             <h2 className="text-2xl font-black uppercase text-secondary mb-4">8. Legislación aplicable</h2>
             <p className="text-xl leading-relaxed font-bold">

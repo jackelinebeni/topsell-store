@@ -86,3 +86,21 @@ export const submitContact = async (contactData) => {
     return { success: false, error: errorMessage };
   }
 };
+
+export const submitNewsUser = async (email, verificationState) => {
+    try {
+        // AQUÍ ESTÁ LA CLAVE: 
+        // El backend espera "verificacion" (español), nosotros le pasamos el valor del estado.
+        const payload = {
+            email: email,
+            verificacion: verificationState // Mapeamos la variable al nombre que quiere el backend
+        };
+
+        const response = await axios.post(`${API_URL}/contacts/subscribe`, payload);
+        return { success: true, data: response.data };
+    } catch (error) {
+        console.error("Error al suscribir al usuario:", error);
+        const errorMessage = error.response?.data?.error || 'Error al suscribir. Por favor, intenta nuevamente.';
+        return { success: false, error: errorMessage };
+    }
+};

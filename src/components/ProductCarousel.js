@@ -13,6 +13,15 @@ export default function ProductCarousel({ title, products }) {
   return (
     <div className="px-4">
       <style jsx global>{`
+        /* 1. Forzar que todos los slides tengan la misma altura */
+        .product-carousel .swiper-wrapper {
+          display: flex;
+        }
+        .product-carousel .swiper-slide {
+          height: auto; /* Permite que el flex del wrapper dicte la altura */
+          display: flex;
+        }
+        
         @media (max-width: 640px) {
           .product-carousel .swiper-button-next,
           .product-carousel .swiper-button-prev {
@@ -26,7 +35,6 @@ export default function ProductCarousel({ title, products }) {
       `}</style>
       
       <div className="flex flex-col items-center mb-8 text-center">
-          {/* Título aumentado de 3xl a 4xl */}
           <h2 className="text-4xl font-bold text-secondary">{title}</h2>
           <div className="w-16 h-1 bg-primary mt-2 mb-4 rounded-full"></div>
       </div>
@@ -63,11 +71,12 @@ export default function ProductCarousel({ title, products }) {
       >
         {products.map((product) => (
           <SwiperSlide key={product.id} className="py-2">
-            <Link href={`/producto/${product.slug}`} className="block h-full group">
+            {/* 2. Asegurar que el Link y el div interno ocupen el 100% de la altura */}
+            <Link href={`/producto/${product.slug}`} className="block w-full h-full group">
               <div className="border border-gray-100 rounded-2xl p-3 sm:p-4 md:p-6 hover:shadow-xl transition-shadow duration-300 bg-white h-full flex flex-col items-center text-center cursor-pointer">
                 
-                {/* Imagen */}
-                <div className="relative w-full aspect-square mb-3 sm:mb-4 md:mb-6 rounded-lg overflow-hidden">
+                {/* Imagen y Bullet de Stock */}
+                <div className="relative w-full aspect-square mb-3 sm:mb-4 md:mb-6 rounded-lg overflow-hidden flex-shrink-0">
                   <Image
                     src={product.imageUrl}
                     alt={product.name}
@@ -75,27 +84,36 @@ export default function ProductCarousel({ title, products }) {
                     className="object-contain group-hover:scale-110 transition duration-500"
                     unoptimized
                   />
+                  
+                  {/* --- AQUI COMIENZA EL CAMBIO --- */}
+                  {product.stock === 0 && (
+                    <div className="absolute top-2 left-2 bg-red-500/90 text-white text-[10px] sm:text-lg font-bold px-2 py-1 rounded-full shadow-sm z-10 backdrop-blur-[2px]">
+                      Agotado
+                    </div>
+                  )}
+                  {/* --- FIN DEL CAMBIO --- */}
+
                 </div>
                 
-                {/* Info */}
-                <div className="flex-grow w-full">
-                    {/* Categoría aumentada de 11px/xs a xs/sm */}
-                    <span className="inline-block px-2 py-1 bg-gray-100 text-lg sm:text-sm font-medium text-gray-500 rounded-md mb-2">
-                      {product.category?.name || 'General'}
-                    </span>
-                    {/* Nombre aumentado de xs/base/lg a sm/lg/xl */}
-                    <h3 className="font-semibold text-secondary text-lg sm:text-lg md:text-xl mb-1 sm:mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+                {/* Info - flex-grow hará que este div empuje al botón hacia abajo */}
+                <div className="flex-grow w-full flex flex-col">
+                    <div className="mb-2">
+                      <span className="inline-block px-2 py-1 bg-gray-100 text-xs sm:text-sm font-medium text-gray-500 rounded-md">
+                        {product.category?.name || 'General'}
+                      </span>
+                    </div>
+
+                    <h3 className="font-semibold text-secondary text-lg sm:text-lg md:text-xl mb-1 sm:mb-2 line-clamp-2 leading-tight group-hover:text-primary transition-colors min-h-[3rem]">
                       {product.name}
                     </h3>
-                    {/* Descripción aumentada de 11px/xs/sm a xs/sm/base */}
+
                     <p className="text-xs sm:text-sm md:text-base text-gray-500 line-clamp-2 mb-2 sm:mb-4 px-0 sm:px-2 hidden sm:block">
                       {product.shortDescription}
                     </p>
                 </div>
 
                 {/* Botón de Acción */}
-                <div className="mt-2 sm:mt-4 flex flex-col items-center gap-3 w-full">
-                    {/* Botón texto aumentado de 10px/sm a xs/base */}
+                <div className="mt-auto pt-2 sm:pt-4 w-full">
                     <button 
                       className="w-full bg-primary hover:bg-primary-hover text-white py-1.5 sm:py-2 md:py-2.5 px-2 sm:px-4 rounded-xl text-xs sm:text-base font-medium transition flex justify-center items-center gap-1 sm:gap-2 shadow-md hover:shadow-lg transform active:scale-95"
                     >
