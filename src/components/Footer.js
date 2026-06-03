@@ -145,11 +145,10 @@ export default function Footer() {
                 <p>Lunes - Viernes: 9:00AM - 6:00PM</p>
                 <p>Sábado: 9:00AM - 2:00PM</p>
               </li>
-              <li className="hover:text-white transition cursor-pointer">ventas@topsell.com</li>
+              <li className="hover:text-white transition cursor-pointer">info@topsell.com</li>
             </ul>
             <div className="flex flex-col gap-2 mt-6 ">
-              <span className="text-gray-400 text-xl font-medium">+51 977 658 053</span>
-              <a href="https://wa.me/51977658053" target="_blank" rel="noopener noreferrer" className="flex flex-col items-start gap-2 group w-max">
+              <a href="https://wa.me/51933636607" target="_blank" rel="noopener noreferrer" className="flex flex-col items-start gap-2 group w-max">
                 <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl group-hover:bg-green-600 transition shadow-md hover:scale-110 duration-300">
                   <FaWhatsapp />
                 </div>
@@ -184,8 +183,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-8 text-2xl tracking-wide">Redes Sociales</h4>
             <div className="flex gap-6">
-              <a href="#" className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"><FaFacebookF /></a>
-              <a href="#" className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"><FaInstagram /></a>
+              <a href="https://www.facebook.com/share/1D6M2esNu1/" className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"><FaFacebookF /></a>
+              <a href="https://www.instagram.com/corporacion_topsell?igsh=ejNodTAzdXlpcGho" className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"><FaInstagram /></a>
               <a href="#" className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"><FaTiktok /></a>
             </div>
           </div>
