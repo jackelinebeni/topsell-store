@@ -8,6 +8,15 @@ import 'swiper/css/navigation';
 export default function CategoryCarousel({ categories }) {
   if (!categories || categories.length === 0) return null;
 
+  const sorted = [...categories].sort((a, b) => {
+    const aHas = a.sortOrder != null;
+    const bHas = b.sortOrder != null;
+    if (aHas && bHas) return a.sortOrder - b.sortOrder;
+    if (aHas) return -1;
+    if (bHas) return 1;
+    return 0;
+  });
+
   return (
     <div className="py-4">
       {/* Título: text-3xl */}
@@ -29,7 +38,7 @@ export default function CategoryCarousel({ categories }) {
         }}
         className="px-4"
       >
-        {categories.map((cat) => (
+        {sorted.map((cat) => (
           <SwiperSlide key={cat.id}>
             <div className="flex flex-col items-center justify-center group cursor-pointer pb-2">
               {/* Contenedor aumentado: de w-32 (128px) a w-40 (160px) */}

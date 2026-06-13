@@ -48,8 +48,16 @@ export default function Header() {
   useEffect(() => {
     const fetchCats = async () => {
       const data = await getCategories();
-      setCategories(data);
-      if (data.length > 0) setActiveCategory(data[0]);
+      const sorted = [...data].sort((a, b) => {
+        const aHas = a.sortOrder != null;
+        const bHas = b.sortOrder != null;
+        if (aHas && bHas) return a.sortOrder - b.sortOrder;
+        if (aHas) return -1;
+        if (bHas) return 1;
+        return 0;
+      });
+      setCategories(sorted);
+      if (sorted.length > 0) setActiveCategory(sorted[0]);
     };
     fetchCats();
 

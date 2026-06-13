@@ -22,7 +22,15 @@ function TiendaContent() {
         getCategories(),
         getProducts()
       ]);
-      setCategories(catsData);
+      const sortedCats = [...catsData].sort((a, b) => {
+        const aHas = a.sortOrder != null;
+        const bHas = b.sortOrder != null;
+        if (aHas && bHas) return a.sortOrder - b.sortOrder;
+        if (aHas) return -1;
+        if (bHas) return 1;
+        return 0;
+      });
+      setCategories(sortedCats);
       setAllProducts(prodsData);
     };
     fetchData();
