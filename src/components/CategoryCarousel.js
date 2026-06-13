@@ -2,6 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import Image from 'next/image';
+import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -40,7 +41,7 @@ export default function CategoryCarousel({ categories }) {
       >
         {sorted.map((cat) => (
           <SwiperSlide key={cat.id}>
-            <div className="flex flex-col items-center justify-center group cursor-pointer pb-2">
+            <Link href={`/productos?category=${cat.slug}`} className="flex flex-col items-center justify-center group cursor-pointer pb-2">
               {/* Contenedor aumentado: de w-32 (128px) a w-40 (160px) */}
               <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-primary transition-all duration-300 shadow-md group-hover:shadow-lg">
                 <Image
@@ -56,7 +57,7 @@ export default function CategoryCarousel({ categories }) {
               <h3 className="mt-5 font-semibold text-2xl text-secondary group-hover:text-primary text-center leading-tight">
                 {cat.name}
               </h3>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
