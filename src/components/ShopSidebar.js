@@ -4,13 +4,17 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 
 export default function ShopSidebar({ 
   categories, 
+  brands = [],
   selectedCategory, 
   selectedSubCategory,
+  selectedBrand,
   onSelectCategory,
   onSelectSubCategory,
+  onSelectBrand,
   onClearFilters
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const [isBrandsOpen, setIsBrandsOpen] = useState(true);
   const [openSubCategories, setOpenSubCategories] = useState({});
 
   // Corrección de lógica: Sincronizar apertura de subcategorías con la selección
@@ -119,6 +123,36 @@ export default function ShopSidebar({
             </ul>
         )}
       </div>
+
+      {/* Bloque de Marcas */}
+      {brands.length > 0 && (
+        <div className="border-t border-gray-100 py-6">
+          <div
+            className="flex justify-between items-center cursor-pointer mb-6"
+            onClick={() => setIsBrandsOpen(!isBrandsOpen)}
+          >
+            <h3 className="font-bold text-secondary text-xl">Marcas</h3>
+            <span className="text-gray-400 text-sm">{isBrandsOpen ? <FaMinus /> : <FaPlus />}</span>
+          </div>
+
+          {isBrandsOpen && (
+            <ul className="space-y-4">
+              {brands.map((brand) => (
+                <li key={brand.id}>
+                  <button
+                    onClick={() => onSelectBrand(brand.slug)}
+                    className={`w-full text-left text-xl transition ${
+                      selectedBrand === brand.slug ? 'text-primary font-bold' : 'text-gray-500 hover:text-secondary'
+                    }`}
+                  >
+                    {brand.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </aside>
   );
 }

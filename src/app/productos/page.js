@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getCategories, getProducts } from '@/services/api';
+import { getCategories, getProducts, getBrands } from '@/services/api';
 import ShopSidebar from '@/components/ShopSidebar';
 import ShopProductCard from '@/components/ShopProductCard';
 
@@ -9,18 +9,21 @@ function TiendaContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const PRODUCTS_PER_PAGE = 12;
 
   const selectedCategory = useMemo(() => searchParams.get('category'), [searchParams]);
   const selectedSubCategory = useMemo(() => searchParams.get('subcategory'), [searchParams]);
+  const selectedBrand = useMemo(() => searchParams.get('brand'), [searchParams]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [catsData, prodsData] = await Promise.all([
+      const [catsData, prodsData, brandsData] = await Promise.all([
         getCategories(),
-        getProducts()
+        getProducts(),
+        getBrands()
       ]);
       const sortedCats = [...catsData].sort((a, b) => {
         const aHas = a.sortOrder != null;
@@ -30,7 +33,16 @@ function TiendaContent() {
         if (bHas) return 1;
         return 0;
       });
+      const sortedBrands = [...brandsData].sort((a, b) => {
+        const aHas = a.sortOrder != null;
+        const bHas = b.sortOrder != null;
+        if (aHas && bHas) return a.sortOrder - b.sortOrder;
+        if (aHas) return -1;
+        if (bHas) return 1;
+        return 0;
+      });
       setCategories(sortedCats);
+      setBrands(sortedBrands);
       setAllProducts(prodsData);
     };
     fetchData();
@@ -40,12 +52,14 @@ function TiendaContent() {
     let filtered = allProducts;
     if (selectedSubCategory) {
       filtered = filtered.filter(p => p.subCategory?.slug === selectedSubCategory);
-    } 
-    else if (selectedCategory) {
+    } else if (selectedCategory) {
       filtered = filtered.filter(p => p.category?.slug === selectedCategory);
     }
-    return filtered;
-  }, [selectedCategory, selectedSubCategory, allProducts]);
+    if (selectedBrand) {
+      filtered = filtered.filter(p => p.brand?.slug === selectedBrand);
+    }
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'es'));
+  }, [selectedCategory, selectedSubCategory, selectedBrand, allProducts]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
   const validCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
@@ -60,21 +74,29 @@ function TiendaContent() {
 
   const handleSelectCategory = (slug) => {
     setCurrentPage(1);
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     params.set('category', slug);
+    params.delete('subcategory');
     router.push(`/productos?${params.toString()}`);
   };
 
   const handleSelectSubCategory = (slug) => {
     setCurrentPage(1);
-    const parentCategory = categories.find(cat => 
+    const parentCategory = categories.find(cat =>
       cat.subCategories?.some(sub => sub.slug === slug)
     );
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     if (parentCategory) {
       params.set('category', parentCategory.slug);
     }
     params.set('subcategory', slug);
+    router.push(`/productos?${params.toString()}`);
+  };
+
+  const handleSelectBrand = (slug) => {
+    setCurrentPage(1);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('brand', slug);
     router.push(`/productos?${params.toString()}`);
   };
 
@@ -96,11 +118,14 @@ function TiendaContent() {
         <div className="flex flex-col md:flex-row gap-12">
           
           <ShopSidebar 
-            categories={categories} 
+            categories={categories}
+            brands={brands}
             selectedCategory={selectedCategory}
             selectedSubCategory={selectedSubCategory}
+            selectedBrand={selectedBrand}
             onSelectCategory={handleSelectCategory}
             onSelectSubCategory={handleSelectSubCategory}
+            onSelectBrand={handleSelectBrand}
             onClearFilters={handleClearFilters}
           />
 
