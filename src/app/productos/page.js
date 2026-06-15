@@ -74,9 +74,8 @@ function TiendaContent() {
 
   const handleSelectCategory = (slug) => {
     setCurrentPage(1);
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     params.set('category', slug);
-    params.delete('subcategory');
     router.push(`/productos?${params.toString()}`);
   };
 
@@ -85,7 +84,7 @@ function TiendaContent() {
     const parentCategory = categories.find(cat =>
       cat.subCategories?.some(sub => sub.slug === slug)
     );
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     if (parentCategory) {
       params.set('category', parentCategory.slug);
     }
@@ -95,7 +94,7 @@ function TiendaContent() {
 
   const handleSelectBrand = (slug) => {
     setCurrentPage(1);
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     params.set('brand', slug);
     router.push(`/productos?${params.toString()}`);
   };
