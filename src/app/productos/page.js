@@ -62,19 +62,35 @@ function TiendaContent() {
     }
 
     return [...filtered].sort((a, b) => {
-      // 1. Extraemos el primer bloque de números que encuentre en el nombre (ej. "6" de "BORNERA 6A")
-      const matchA = a.name.match(/\d+/);
-      const matchB = b.name.match(/\d+/);
+      // 1. Extraemos todos los números. Si no hay, devolvemos un array vacío []
+      const numsA = a.name.match(/\d+/g) || [];
+      const numsB = b.name.match(/\d+/g) || [];
 
-      const numA = matchA ? parseInt(matchA[0], 10) : null;
-      const numB = matchB ? parseInt(matchB[0], 10) : null;
+      const hasNumA = numsA.length > 0;
+      const hasNumB = numsB.length > 0;
 
-      // 2. Si ambos tienen un número, forzamos el orden matemático ascendente (6 -> 10 -> 15...)
-      if (numA !== null && numB !== null && numA !== numB) {
-        return numA - numB;
+      // 2. Prioridad: Textos puros van primero
+      if (!hasNumA && hasNumB) return -1;
+      if (hasNumA && !hasNumB) return 1;
+
+      // 3. Comparación dinámica de N números
+      if (hasNumA && hasNumB) {
+        // Determinamos hasta dónde iterar (usamos el tamaño del array más corto)
+        const minLength = Math.min(numsA.length, numsB.length);
+
+        for (let i = 0; i < minLength; i++) {
+          const numA = parseInt(numsA[i], 10);
+          const numB = parseInt(numsB[i], 10);
+
+          // Si encontramos una diferencia en la misma posición, ordenamos y cortamos la ejecución
+          if (numA !== numB) {
+            return numA - numB;
+          }
+        }
       }
 
-      // 3. Fallback: Si los números son iguales (o no tienen número), usamos tu lógica original
+      // 4. Fallback: Si empatan en todos los números iterados o si ninguno tiene números,
+      // el localeCompare con { numeric: true } se encarga de desempatar por las letras restantes.
       return a.name.localeCompare(b.name, 'es', { numeric: true });
     });
 
