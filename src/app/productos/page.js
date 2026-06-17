@@ -50,15 +50,34 @@ function TiendaContent() {
 
   const filteredProducts = useMemo(() => {
     let filtered = allProducts;
+
     if (selectedSubCategory) {
       filtered = filtered.filter(p => p.subCategory?.slug === selectedSubCategory);
     } else if (selectedCategory) {
       filtered = filtered.filter(p => p.category?.slug === selectedCategory);
     }
+
     if (selectedBrand) {
       filtered = filtered.filter(p => p.brand?.name === selectedBrand);
     }
-    return [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'es', { numeric: true }));
+
+    return [...filtered].sort((a, b) => {
+      // 1. Extraemos el primer bloque de números que encuentre en el nombre (ej. "6" de "BORNERA 6A")
+      const matchA = a.name.match(/\d+/);
+      const matchB = b.name.match(/\d+/);
+
+      const numA = matchA ? parseInt(matchA[0], 10) : null;
+      const numB = matchB ? parseInt(matchB[0], 10) : null;
+
+      // 2. Si ambos tienen un número, forzamos el orden matemático ascendente (6 -> 10 -> 15...)
+      if (numA !== null && numB !== null && numA !== numB) {
+        return numA - numB;
+      }
+
+      // 3. Fallback: Si los números son iguales (o no tienen número), usamos tu lógica original
+      return a.name.localeCompare(b.name, 'es', { numeric: true });
+    });
+
   }, [selectedCategory, selectedSubCategory, selectedBrand, allProducts]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
@@ -115,8 +134,8 @@ function TiendaContent() {
     <div className="bg-white min-h-screen font-sans">
       <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] py-12">
         <div className="flex flex-col md:flex-row gap-12">
-          
-          <ShopSidebar 
+
+          <ShopSidebar
             categories={categories}
             brands={brands}
             selectedCategory={selectedCategory}
@@ -131,79 +150,78 @@ function TiendaContent() {
           <div className="flex-grow">
             {/* Cabecera Móvil: Aumentada de text-sm a text-base */}
             <div className="md:hidden mb-6 flex justify-between items-center">
-                <span className="text-base text-gray-500 font-medium">{filteredProducts.length} Productos</span>
+              <span className="text-base text-gray-500 font-medium">{filteredProducts.length} Productos</span>
             </div>
 
             {currentProducts.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
-                    {currentProducts.map((product) => (
-                        <ShopProductCard key={product.id} product={product} />
-                    ))}
-                </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+                {currentProducts.map((product) => (
+                  <ShopProductCard key={product.id} product={product} />
+                ))}
+              </div>
             ) : (
-                <div className="text-center py-24 bg-gray-50 rounded-2xl">
-                    {/* Texto de no resultados aumentado a text-xl */}
-                    <p className="text-gray-500 text-xl">No se encontraron productos en esta categoría.</p>
-                    <button onClick={handleClearFilters} className="text-primary mt-4 text-lg font-bold hover:underline">
-                        Ver todos los productos
-                    </button>
-                </div>
+              <div className="text-center py-24 bg-gray-50 rounded-2xl">
+                {/* Texto de no resultados aumentado a text-xl */}
+                <p className="text-gray-500 text-xl">No se encontraron productos en esta categoría.</p>
+                <button onClick={handleClearFilters} className="text-primary mt-4 text-lg font-bold hover:underline">
+                  Ver todos los productos
+                </button>
+              </div>
             )}
 
             {/* PAGINACIÓN: El contenedor ya tenía text-lg, los botones internos se benefician de ello */}
             {filteredProducts.length > 0 && (
               <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xl font-medium">
-                  <span className="text-gray-500">
-                      Mostrando {startIndex + 1}–{Math.min(endIndex, filteredProducts.length)} de {filteredProducts.length} Productos
-                  </span>
-                  
-                  {totalPages > 1 && (
-                    <div className="flex items-center gap-3">
-                        <button 
-                          onClick={handlePrevPage}
-                          disabled={validCurrentPage === 1}
-                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                        >
-                          Anterior
-                        </button>
-                        
-                        <div className="flex items-center gap-1">
-                          {[...Array(totalPages)].map((_, index) => {
-                            const page = index + 1;
-                            if (
-                              page === 1 || 
-                              page === totalPages || 
-                              (page >= validCurrentPage - 1 && page <= validCurrentPage + 1)
-                            ) {
-                              return (
-                                <button
-                                  key={page}
-                                  onClick={() => handlePageClick(page)}
-                                  className={`w-10 h-10 flex items-center justify-center border-2 rounded-lg transition ${
-                                    validCurrentPage === page
-                                      ? 'border-primary text-primary font-bold bg-primary/5'
-                                      : 'border-transparent text-gray-500 hover:border-gray-200'
-                                  }`}
-                                >
-                                  {page}
-                                </button>
-                              );
-                            } else if (page === validCurrentPage - 2 || page === validCurrentPage + 2) {
-                              return <span key={page} className="text-gray-400 px-1">...</span>;
-                            }
-                            return null;
-                          })}
-                        </div>
-                        
-                        <button 
-                          onClick={handleNextPage}
-                          disabled={validCurrentPage === totalPages}
-                          className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                        >
-                          Siguiente
-                        </button>
+                <span className="text-gray-500">
+                  Mostrando {startIndex + 1}–{Math.min(endIndex, filteredProducts.length)} de {filteredProducts.length} Productos
+                </span>
+
+                {totalPages > 1 && (
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handlePrevPage}
+                      disabled={validCurrentPage === 1}
+                      className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Anterior
+                    </button>
+
+                    <div className="flex items-center gap-1">
+                      {[...Array(totalPages)].map((_, index) => {
+                        const page = index + 1;
+                        if (
+                          page === 1 ||
+                          page === totalPages ||
+                          (page >= validCurrentPage - 1 && page <= validCurrentPage + 1)
+                        ) {
+                          return (
+                            <button
+                              key={page}
+                              onClick={() => handlePageClick(page)}
+                              className={`w-10 h-10 flex items-center justify-center border-2 rounded-lg transition ${validCurrentPage === page
+                                  ? 'border-primary text-primary font-bold bg-primary/5'
+                                  : 'border-transparent text-gray-500 hover:border-gray-200'
+                                }`}
+                            >
+                              {page}
+                            </button>
+                          );
+                        } else if (page === validCurrentPage - 2 || page === validCurrentPage + 2) {
+                          return <span key={page} className="text-gray-400 px-1">...</span>;
+                        }
+                        return null;
+                      })}
                     </div>
-                  )}
+
+                    <button
+                      onClick={handleNextPage}
+                      disabled={validCurrentPage === totalPages}
+                      className="text-gray-800 hover:text-primary px-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Siguiente
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
