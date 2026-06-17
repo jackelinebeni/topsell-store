@@ -62,38 +62,16 @@ function TiendaContent() {
     }
 
     return [...filtered].sort((a, b) => {
-      // 1. Extraemos todos los números. Si no hay, devolvemos un array vacío []
-      const numsA = a.name.match(/\d+/g) || [];
-      const numsB = b.name.match(/\d+/g) || [];
+      // 1. Normalizamos los espacios: "Cable   3x14" se convierte en "Cable 3x14"
+      const nameA = a.name.replace(/\s+/g, ' ').trim();
+      const nameB = b.name.replace(/\s+/g, ' ').trim();
 
-      const hasNumA = numsA.length > 0;
-      const hasNumB = numsB.length > 0;
-
-      // 2. Prioridad: Textos puros van primero
-      if (!hasNumA && hasNumB) return -1;
-      if (hasNumA && !hasNumB) return 1;
-
-      // 3. Comparación dinámica de N números
-      if (hasNumA && hasNumB) {
-        // Determinamos hasta dónde iterar (usamos el tamaño del array más corto)
-        const minLength = Math.min(numsA.length, numsB.length);
-
-        for (let i = 0; i < minLength; i++) {
-          const numA = parseInt(numsA[i], 10);
-          const numB = parseInt(numsB[i], 10);
-
-          // Si encontramos una diferencia en la misma posición, ordenamos y cortamos la ejecución
-          if (numA !== numB) {
-            return numA - numB;
-          }
-        }
-      }
-
-      // 4. Fallback: Si empatan en todos los números iterados o si ninguno tiene números,
-      // el localeCompare con { numeric: true } se encarga de desempatar por las letras restantes.
-      return a.name.localeCompare(b.name, 'es', { numeric: true });
+      // 2. Aplicamos el ordenamiento natural y sensible al idioma
+      return nameA.localeCompare(nameB, 'es', {
+        numeric: true,       // Ordena los números matemáticamente (3, 6, 8, 10, 14, 16)
+        sensitivity: 'base'  // Ignora mayúsculas, minúsculas y tildes (Extensión == extension == EXTENSIÓN)
+      });
     });
-
   }, [selectedCategory, selectedSubCategory, selectedBrand, allProducts]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
