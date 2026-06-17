@@ -56,9 +56,9 @@ function TiendaContent() {
       filtered = filtered.filter(p => p.category?.slug === selectedCategory);
     }
     if (selectedBrand) {
-      filtered = filtered.filter(p => p.brand?.slug === selectedBrand);
+      filtered = filtered.filter(p => p.brand?.name === selectedBrand);
     }
-    return [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'es'));
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'es', { numeric: true }));
   }, [selectedCategory, selectedSubCategory, selectedBrand, allProducts]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
