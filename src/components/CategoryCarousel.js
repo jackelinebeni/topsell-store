@@ -4,6 +4,7 @@ import { Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import 'swiper/css';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 import 'swiper/css/navigation';
 
 export default function CategoryCarousel({ categories }) {
@@ -45,7 +46,7 @@ export default function CategoryCarousel({ categories }) {
               {/* Contenedor aumentado: de w-32 (128px) a w-40 (160px) */}
               <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-primary transition-all duration-300 shadow-md group-hover:shadow-lg">
                 <Image
-                  src={cat.image || 'https://placehold.co/300x300'}
+                  src={getCloudinaryUrl(cat.image || 'https://placehold.co/300x300', { width: 300, height: 300, crop: 'fill' })}
                   alt={cat.name}
                   fill
                   className="object-cover group-hover:scale-110 transition duration-500"

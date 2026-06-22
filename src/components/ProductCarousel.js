@@ -6,6 +6,7 @@ import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/grid';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export default function ProductCarousel({ title, products }) {
   if (!products || products.length === 0) return null;
@@ -78,7 +79,7 @@ export default function ProductCarousel({ title, products }) {
                 {/* Imagen y Bullet de Stock */}
                 <div className="relative w-full aspect-square mb-3 sm:mb-4 md:mb-6 rounded-lg overflow-hidden flex-shrink-0">
                   <Image
-                    src={product.imageUrl}
+                    src={getCloudinaryUrl(product.imageUrl, { width: 500, height: 500 })}
                     alt={product.name}
                     fill
                     className="object-contain group-hover:scale-110 transition duration-500"

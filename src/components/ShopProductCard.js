@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export default function ShopProductCard({ product }) {
   // Solo lógica de stock, quitamos lógica de oferta por precio
@@ -19,7 +20,7 @@ export default function ShopProductCard({ product }) {
         </div>
 
         <Image
-          src={product.imageUrl}
+          src={getCloudinaryUrl(product.imageUrl, { width: 500, height: 500 })}
           alt={product.name}
           fill
           className="object-contain group-hover:scale-105 transition duration-500"

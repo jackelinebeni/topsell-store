@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaEye } from 'react-icons/fa';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export default function ProductCard({ product }) {
   return (
@@ -9,7 +10,7 @@ export default function ProductCard({ product }) {
       {/* Imagen */}
       <div className="relative w-full h-64 bg-gray-50">
         <Image 
-          src={product.imageUrl} 
+          src={getCloudinaryUrl(product.imageUrl, { width: 500, height: 500 })} 
           alt={product.name}
           fill
           className="object-contain group-hover:scale-105 transition-transform duration-500"

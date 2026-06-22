@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 // Estilos de Swiper
 import 'swiper/css';
@@ -31,7 +32,7 @@ export default function HeroCarousel({ banners }) {
         {banners.map((banner, index) => (
           <SwiperSlide key={banner.id || index} className="relative w-full h-full">
             <Image
-              src={banner.imageUrl}
+              src={getCloudinaryUrl(banner.imageUrl, { width: 1400, crop: 'limit' })}
               alt={banner.alt || "Banner promocional"}
               fill
               // 'object-cover' es el truco maestro: llena el espacio sin deformar, recortando los bordes si es necesario

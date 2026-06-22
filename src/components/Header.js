@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 import {
   FaShoppingCart,
   FaUser,
@@ -262,7 +263,7 @@ export default function Header() {
                         {/* Imagen: w-16 h-16 -> w-20 h-20 */}
                         <div className="relative w-20 h-20 flex-shrink-0 border border-gray-100 rounded-lg bg-white shadow-sm">
                           <Image
-                            src={product.imageUrl}
+                            src={getCloudinaryUrl(product.imageUrl, { width: 150, height: 150 })}
                             alt={product.name}
                             fill
                             className="object-contain p-2"
@@ -386,7 +387,7 @@ export default function Header() {
                           {/* Imagen: w-12 h-12 -> w-20 h-20 */}
                           <div className="w-20 h-20 relative border border-gray-100 rounded-lg overflow-hidden flex-shrink-0 bg-white shadow-sm">
                             <Image
-                              src={item.imageUrl}
+                              src={getCloudinaryUrl(item.imageUrl, { width: 150, height: 150 })}
                               alt={item.name}
                               fill
                               className="object-contain p-2"

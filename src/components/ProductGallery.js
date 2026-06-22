@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import { getCloudinaryUrl } from '@/utils/cloudinary';
 
 export default function ProductGallery({ mainImage, secondaryImages = [], productName }) {
   // Construir array de imágenes: principal primero, luego las secundarias
@@ -22,7 +23,7 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
             onClick={() => setSelectedImage(img)}
           >
             <Image 
-                src={img} 
+                src={getCloudinaryUrl(img, { width: 200, height: 200 })} 
                 alt={`Thumb ${index}`} 
                 fill 
                 className="object-contain p-1"
@@ -34,7 +35,7 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
       {/* 2. Imagen Principal (Grande) */}
       <div className="relative flex-grow bg-white border border-gray-100 rounded-lg overflow-hidden min-h-[400px] md:min-h-[500px]">
         <Image 
-            src={selectedImage} 
+            src={getCloudinaryUrl(selectedImage, { width: 800, height: 800 })} 
             alt={productName} 
             fill 
             className="object-contain p-8 hover:scale-105 transition duration-500"
