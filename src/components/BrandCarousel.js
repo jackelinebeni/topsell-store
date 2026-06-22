@@ -47,7 +47,6 @@ export default function BrandCarousel({ brands }) {
                   alt={brand.name}
                   fill
                   className="object-contain" // object-contain es clave para que logos irregulares se vean bien centrados
-                  unoptimized
                 />
               </div>
             </div>

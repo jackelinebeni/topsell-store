@@ -23,7 +23,6 @@ export default function ShopProductCard({ product }) {
           alt={product.name}
           fill
           className="object-contain group-hover:scale-105 transition duration-500"
-          unoptimized
         />
       </div>
 

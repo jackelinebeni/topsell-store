@@ -266,7 +266,6 @@ export default function Header() {
                             alt={product.name}
                             fill
                             className="object-contain p-2"
-                            unoptimized
                           />
                         </div>
                         <div className="min-w-0 flex-1">
@@ -391,7 +390,6 @@ export default function Header() {
                               alt={item.name}
                               fill
                               className="object-contain p-2"
-                              unoptimized
                             />
                           </div>
                           <div className="flex-grow min-w-0">

@@ -58,7 +58,7 @@ function TiendaContent() {
     }
 
     if (selectedBrand) {
-      filtered = filtered.filter(p => p.brand?.name === selectedBrand);
+      filtered = filtered.filter(p => p.brand?.slug === selectedBrand);
     }
 
     return [...filtered].sort((a, b) => {

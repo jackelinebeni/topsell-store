@@ -49,7 +49,6 @@ export default function CategoryCarousel({ categories }) {
                   alt={cat.name}
                   fill
                   className="object-cover group-hover:scale-110 transition duration-500"
-                  unoptimized
                 />
               </div>
               

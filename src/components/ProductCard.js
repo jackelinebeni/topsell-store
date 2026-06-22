@@ -13,7 +13,6 @@ export default function ProductCard({ product }) {
           alt={product.name}
           fill
           className="object-contain group-hover:scale-105 transition-transform duration-500"
-          unoptimized
         />
         
         {/* Etiqueta (Opcional: Solo si es nuevo o destacado, ya no por precio) */}

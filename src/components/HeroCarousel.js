@@ -39,7 +39,6 @@ export default function HeroCarousel({ banners }) {
               className="object-cover object-center"
               priority={index === 0}
               sizes="100vw" // Ayuda a Next.js a optimizar la carga según el ancho de pantalla
-              unoptimized 
             />
           </SwiperSlide>
         ))}

@@ -82,7 +82,6 @@ export default function ProductCarousel({ title, products }) {
                     alt={product.name}
                     fill
                     className="object-contain group-hover:scale-110 transition duration-500"
-                    unoptimized
                   />
                   
                   {/* --- AQUI COMIENZA EL CAMBIO --- */}

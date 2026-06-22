@@ -26,7 +26,6 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
                 alt={`Thumb ${index}`} 
                 fill 
                 className="object-contain p-1"
-                unoptimized
             />
           </div>
         ))}
@@ -39,7 +38,6 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
             alt={productName} 
             fill 
             className="object-contain p-8 hover:scale-105 transition duration-500"
-            unoptimized
         />
       </div>
 
