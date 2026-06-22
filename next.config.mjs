@@ -2,14 +2,15 @@
 const nextConfig = {
   reactCompiler: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co', // Permitimos nuestro proveedor de imágenes dummy
+        hostname: 'placehold.co',
       },
       {
         protocol: 'https',
-        hostname: '**', // (Opcional) En desarrollo puedes usar esto para permitir todo, pero en prod restringe.
+        hostname: '**',
       }
     ],
   },
