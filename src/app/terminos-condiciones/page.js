@@ -1,9 +1,6 @@
 ﻿import { getLegalPageContent } from '@/services/api';
 import { sanitizeRichText } from '@/utils/sanitizeHtml';
 
-// Página completamente dinámica (sin caché)
-export const dynamic = 'force-dynamic';
-
 export const metadata = {
   title: "Términos y Condiciones",
 };
