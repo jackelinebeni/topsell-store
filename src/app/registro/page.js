@@ -1,13 +1,23 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { registerUser, registerGuest } from '@/services/auth';
 import { FaUser, FaUserSecret, FaCheckCircle } from 'react-icons/fa';
 
 export default function RegistroPage() {
-    const [activeTab, setActiveTab] = useState('cliente'); // 'cliente' | 'invitado'
+    return (
+        <Suspense fallback={null}>
+            <RegistroContent />
+        </Suspense>
+    );
+}
+
+function RegistroContent() {
+    const searchParams = useSearchParams();
+    // El tipo de formulario se define por la URL (?tipo=cliente|invitado), no hay tabs seleccionables
+    const activeTab = searchParams.get('tipo') === 'invitado' ? 'invitado' : 'cliente';
     const { login } = useAuth();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -65,28 +75,19 @@ export default function RegistroPage() {
             <div className="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
 
                 <div className="text-center pt-10 pb-6 bg-secondary px-6">
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-2">Crear Cuenta</h2>
-                    <p className="text-gray-400 text-lg">Elige cómo quieres interactuar con Topsell</p>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
+                        {activeTab === 'cliente' ? 'Crear Cuenta' : 'Cotización Rápida'}
+                    </h2>
+                    <p className="text-gray-400 text-lg">
+                        {activeTab === 'cliente' ? 'Regístrate para guardar tu historial y direcciones' : 'Ingresa tus datos para cotizar sin crear contraseña'}
+                    </p>
                 </div>
 
-                {/* --- TABS --- */}
+                {/* --- INDICADOR (sin tabs seleccionables, el modo se define por la URL) --- */}
                 <div className="flex border-b border-gray-200 bg-gray-50">
-                    <button
-                        onClick={() => setActiveTab('cliente')}
-                        className={`flex-1 py-5 text-lg font-bold uppercase tracking-wide transition flex justify-center items-center gap-2
-                    ${activeTab === 'cliente' ? 'border-b-4 border-primary text-primary bg-white' : 'text-gray-400 hover:text-secondary hover:bg-gray-100'}
-                `}
-                    >
-                        <FaUser /> Cliente Habitual
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('invitado')}
-                        className={`flex-1 py-5 text-lg font-bold uppercase tracking-wide transition flex justify-center items-center gap-2
-                    ${activeTab === 'invitado' ? 'border-b-4 border-primary text-primary bg-white' : 'text-gray-400 hover:text-secondary hover:bg-gray-100'}
-                `}
-                    >
-                        <FaUserSecret /> Invitado (Rápido)
-                    </button>
+                    <div className="flex-1 py-5 text-xl font-bold uppercase tracking-wide flex justify-center items-center gap-2 border-b-4 border-primary text-primary bg-white">
+                        {activeTab === 'cliente' ? (<><FaUser /> Cliente</>) : (<><FaUserSecret /> Invitado (Rápido)</>)}
+                    </div>
                 </div>
 
                 {/* --- CONTENIDO --- */}
@@ -201,12 +202,17 @@ export default function RegistroPage() {
 
                     </form>
 
-                    {/* Link a Login */}
-                    {activeTab === 'cliente' && (
-                        <div className="mt-8 text-center text-sm text-gray-500">
-                            ¿Ya tienes una cuenta? <Link href="/login" className="text-primary font-bold hover:underline">Inicia Sesión</Link>
-                        </div>
-                    )}
+                    {/* Link a Login / cambio de modo */}
+                    <div className="mt-8 text-center text-sm text-gray-500 space-y-2">
+                        {activeTab === 'cliente' ? (
+                            <>
+                                <p>¿Ya tienes una cuenta? <Link href="/login" className="text-primary font-bold hover:underline">Inicia Sesión</Link></p>
+                                <p>¿Solo quieres cotizar? <Link href="/registro?tipo=invitado" className="text-primary font-bold hover:underline">Ingresa como invitado</Link></p>
+                            </>
+                        ) : (
+                            <p>¿Prefieres crear una cuenta? <Link href="/registro?tipo=cliente" className="text-primary font-bold hover:underline">Regístrate aquí</Link></p>
+                        )}
+                    </div>
                 </div>
 
             </div>

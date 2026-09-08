@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsappFloatingButton from "@/components/WhatsappFloatingButton";
+import { getCompanyInfo } from "@/services/api";
 
 // 1. IMPORTAR TUS CONTEXTOS
 import { CartProvider } from "@/context/CartContext";
@@ -21,7 +23,9 @@ export const metadata = {
   charset: "UTF-8",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const companyInfo = await getCompanyInfo();
+
   return (
     <html lang="es">
       <body className={`${inter.className} flex flex-col min-h-screen`}>
@@ -38,7 +42,9 @@ export default function RootLayout({ children }) {
               {children}
             </main>
             
-            <Footer />
+            <Footer companyInfo={companyInfo} />
+            
+            <WhatsappFloatingButton phoneNumber={companyInfo?.whatsappNumber} />
             
           </CartProvider>
           

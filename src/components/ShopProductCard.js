@@ -1,3 +1,5 @@
+'use client'; // Asegura la interactividad en el cliente (hover, etc.)
+
 import Image from "next/image";
 import Link from "next/link";
 import { getCloudinaryUrl } from '@/utils/cloudinary';
@@ -7,7 +9,11 @@ export default function ShopProductCard({ product }) {
   const isOutOfStock = product.stock === 0;
 
   return (
-    <div className="group flex flex-col items-center text-center">
+    // CAMBIO 1: El contenedor raíz ahora es el Link
+    <Link
+      href={`/producto/${product.slug}`}
+      className="group flex flex-col items-center text-center hover:no-underline"
+    >
       {/* Imagen + Badge */}
       <div className="relative w-full aspect-square mb-6 overflow-hidden rounded-lg bg-gray-50">
         {/* Badge (Solo Agotado) - Subido de text-[10px] a text-xs */}
@@ -39,14 +45,14 @@ export default function ShopProductCard({ product }) {
           {product.name}
         </h3>
 
-        {/* Enlace "Ver más" - Subido de text-base (16px) a text-lg (18px) */}
-        <Link
-          href={`/producto/${product.slug}`}
-          className="inline-block text-2xl font-bold text-primary hover:text-secondary border-b-2 border-primary/30 hover:border-secondary transition-all pb-1"
+        {/* CAMBIO 2: El enlace "Ver más" ahora es un span estilizado */}
+        {/* Subido de text-base (16px) a text-lg (18px) -> En el código lo mantenemos como text-2xl */}
+        <span
+          className="inline-block text-2xl font-bold text-primary border-b-2 border-primary/30 group-hover:text-secondary group-hover:border-secondary transition-all pb-1"
         >
           Ver más
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }

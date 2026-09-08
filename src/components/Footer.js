@@ -3,8 +3,17 @@ import React, { useState } from "react";
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 import { submitNewsUser } from "@/services/api";
+import { safeExternalUrl, safeWhatsappNumber } from "@/utils/urlSafety";
 
-export default function Footer() {
+export default function Footer({ companyInfo }) {
+  const weekdaysSchedule = companyInfo?.weekdaysSchedule || "Lunes - Viernes: 9:00AM - 6:00PM";
+  const saturdaySchedule = companyInfo?.saturdaySchedule || "Sábado: 9:00AM - 2:00PM";
+  const contactEmail = companyInfo?.email || "info@topsell.com";
+  const whatsappNumber = safeWhatsappNumber(companyInfo?.whatsappNumber, "51933636607");
+  const facebookUrl = safeExternalUrl(companyInfo?.facebookUrl, "https://www.facebook.com/share/1D6M2esNu1/");
+  const instagramUrl = safeExternalUrl(companyInfo?.instagramUrl, "https://www.instagram.com/corporacion_topsell?igsh=ejNodTAzdXlpcGho");
+  const tiktokUrl = safeExternalUrl(companyInfo?.tiktokUrl, "#");
+
   // --- ESTADOS ---
   const [email, setEmail] = useState("");
   const [verification, setVerification] = useState(false); // Nuevo estado para el checkbox
@@ -136,7 +145,7 @@ export default function Footer() {
                   </svg>
                 </div>
                 <span className="text-gray-400 text-lg group-hover:text-white transition select-none">
-                  Acepto recibir comunicaciones (Verificación)
+                  Acepto recibir comunicaciones y promociones.
                 </span>
               </label>
 
@@ -161,16 +170,16 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 text-xl text-gray-400 leading-relaxed">
               <li>
-                <p>Lunes - Viernes: 9:00AM - 6:00PM</p>
-                <p>Sábado: 9:00AM - 2:00PM</p>
+                <p>{weekdaysSchedule}</p>
+                <p>{saturdaySchedule}</p>
               </li>
               <li className="hover:text-white transition cursor-pointer">
-                info@topsell.com
+                {contactEmail}
               </li>
             </ul>
             <div className="flex flex-col gap-2 mt-6 ">
               <a
-                href="https://wa.me/51933636607"
+                href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-start gap-2 group w-max"
@@ -244,7 +253,7 @@ export default function Footer() {
             </h4>
             <div className="flex gap-6">
               <a
-                href="https://www.facebook.com/share/1D6M2esNu1/"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"
@@ -253,7 +262,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://www.instagram.com/corporacion_topsell?igsh=ejNodTAzdXlpcGho"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"
@@ -262,7 +271,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="#"
+                href={tiktokUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition text-3xl hover:scale-110 duration-200"

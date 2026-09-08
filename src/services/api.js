@@ -89,11 +89,9 @@ export const submitContact = async (contactData) => {
 
 export const submitNewsUser = async (email, verificationState) => {
     try {
-        // AQUÍ ESTÁ LA CLAVE: 
-        // El backend espera "verificacion" (español), nosotros le pasamos el valor del estado.
         const payload = {
             email: email,
-            verificacion: verificationState // Mapeamos la variable al nombre que quiere el backend
+            verificacion: verificationState
         };
 
         const response = await axios.post(`${API_URL}/contacts/subscribe`, payload);
@@ -102,5 +100,43 @@ export const submitNewsUser = async (email, verificationState) => {
         console.error("Error al suscribir al usuario:", error);
         const errorMessage = error.response?.data?.error || 'Error al suscribir. Por favor, intenta nuevamente.';
         return { success: false, error: errorMessage };
+    }
+};
+
+// ===== CMS: Contenido de páginas estáticas =====
+
+export const getAboutPageContent = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/pages/about`);
+        return response.data;
+    } catch {
+        return null;
+    }
+};
+
+export const getContactPageContent = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/pages/contact-info`);
+        return response.data;
+    } catch {
+        return null;
+    }
+};
+
+export const getLegalPageContent = async (slug) => {
+    try {
+        const response = await axios.get(`${API_URL}/pages/legal/${slug}`);
+        return response.data;
+    } catch {
+        return null;
+    }
+};
+
+export const getCompanyInfo = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/pages/company-info`);
+        return response.data;
+    } catch {
+        return null;
     }
 };

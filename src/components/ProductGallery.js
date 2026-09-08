@@ -8,6 +8,18 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
   const images = [mainImage, ...secondaryImages].filter(Boolean);
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
+  
+  // Estados para controlar el zoom
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+
+  // Función para calcular la posición del mouse relativa al contenedor
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setMousePosition({ x, y });
+  };
 
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4">
@@ -32,13 +44,25 @@ export default function ProductGallery({ mainImage, secondaryImages = [], produc
         ))}
       </div>
 
-      {/* 2. Imagen Principal (Grande) */}
-      <div className="relative flex-grow bg-white border border-gray-100 rounded-lg overflow-hidden min-h-[400px] md:min-h-[500px]">
+      {/* 2. Imagen Principal con Zoom Interactivo */}
+      <div 
+        className="relative flex-grow bg-white border border-gray-100 rounded-lg overflow-hidden min-h-[400px] md:min-h-[500px] cursor-crosshair"
+        onMouseEnter={() => setIsZoomed(true)}
+        onMouseLeave={() => setIsZoomed(false)}
+        onMouseMove={handleMouseMove}
+      >
         <Image 
-            src={getCloudinaryUrl(selectedImage, { width: 800, height: 800 })} 
+            // Opcional: Aumentar la resolución aquí para que al hacer zoom no se pixele
+            src={getCloudinaryUrl(selectedImage, { width: 1200, height: 1200 })} 
             alt={productName} 
             fill 
-            className="object-contain p-8 hover:scale-105 transition duration-500"
+            className="object-contain transition-transform duration-200 ease-out pointer-events-none"
+            style={{
+              // p-8 equivale a ~2rem, lo removemos visualmente al hacer zoom para aprovechar el espacio
+              padding: isZoomed ? '0' : '2rem', 
+              transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
+              transform: isZoomed ? 'scale(2.5)' : 'scale(1)',
+            }}
         />
       </div>
 

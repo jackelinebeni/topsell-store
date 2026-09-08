@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family: 'Poppins', sans-serif;
+  --font-family: 'gilroy-bold', arial;
   --color-primary: #E31E24;
   --color-primary-hover: #bf1a1f;
   --color-secondary: #1D1D1B;
@@ -11,7 +11,20 @@
 body {
     font-family: var(--font-family);
     background-color: #f9fafb;
-    zoom: 0.75;
+    zoom: 0.85;
+}
+
+/* Contenido enriquecido editable desde el admin (negrita y viñetas) */
+.rich-text-content ul {
+    list-style: disc !important;
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+}
+.rich-text-content li {
+    margin-bottom: 0.25em;
+}
+.rich-text-content b, .rich-text-content strong {
+    font-weight: 700;
 }
 
 .swiper-button-prev, .swiper-button-next {

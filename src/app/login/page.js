@@ -110,11 +110,17 @@ export default function LoginPage() {
                 </button>
             </form>
 
-            <div className="mt-10 text-center pt-8 border-t border-gray-100">
+            <div className="mt-10 text-center pt-2 border-t border-gray-100 space-y-3">
                 <p className="text-base text-gray-500 mb-3">¿Aún no tienes cuenta?</p>
-                <Link href="/registro" className="text-secondary font-bold hover:text-primary transition border-b-2 border-secondary hover:border-primary pb-0.5">
-                    Regístrate aquí
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Link href="/registro?tipo=cliente" className="text-secondary font-bold hover:text-primary transition border-b-2 border-secondary hover:border-primary pb-0.5">
+                        Regístrate aquí
+                    </Link>
+                    <p> o </p>
+                    <Link href="/registro?tipo=invitado" className="text-secondary font-bold hover:text-primary transition border-b-2 border-secondary hover:border-primary pb-0.5">
+                        Ingresa como invitado
+                    </Link>
+                </div>
             </div>
         </div>
       </div>

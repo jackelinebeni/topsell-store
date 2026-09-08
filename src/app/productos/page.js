@@ -11,6 +11,7 @@ function TiendaContent() {
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const PRODUCTS_PER_PAGE = 12;
 
@@ -20,6 +21,7 @@ function TiendaContent() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const [catsData, prodsData, brandsData] = await Promise.all([
         getCategories(),
         getProducts(),
@@ -44,6 +46,7 @@ function TiendaContent() {
       setCategories(sortedCats);
       setBrands(sortedBrands);
       setAllProducts(prodsData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -147,7 +150,12 @@ function TiendaContent() {
               <span className="text-base text-gray-500 font-medium">{filteredProducts.length} Productos</span>
             </div>
 
-            {currentProducts.length > 0 ? (
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-24">
+                <div className="inline-block animate-spin rounded-full h-14 w-14 border-b-2 border-primary"></div>
+                <p className="mt-6 text-lg text-gray-600 font-medium">Cargando catálogo de productos...</p>
+              </div>
+            ) : currentProducts.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
                 {currentProducts.map((product) => (
                   <ShopProductCard key={product.id} product={product} />

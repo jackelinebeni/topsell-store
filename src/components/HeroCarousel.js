@@ -5,7 +5,6 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import { getCloudinaryUrl } from '@/utils/cloudinary';
 
-// Estilos de Swiper
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -16,9 +15,7 @@ export default function HeroCarousel({ banners }) {
   }
 
   return (
-    // 1. Mantenemos el aspect-ratio para que el contenedor sea responsivo por sí mismo
-    // 2. Quitamos el max-h si queremos que sea 100% proporcional, o lo dejamos para pantallas ultra-anchas
-    <div className="w-full relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[1920/1080]">
+    <div className="w-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
@@ -27,20 +24,44 @@ export default function HeroCarousel({ banners }) {
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
-        className="w-full h-full"
+        autoHeight={true} 
+        className="w-full"
       >
         {banners.map((banner, index) => (
-          <SwiperSlide key={banner.id || index} className="relative w-full h-full">
-            <Image
-              src={getCloudinaryUrl(banner.imageUrl, { width: 1400, crop: 'limit' })}
-              alt={banner.alt || "Banner promocional"}
-              fill
-              // 'object-cover' es el truco maestro: llena el espacio sin deformar, recortando los bordes si es necesario
-              // 'object-center' asegura que lo más importante (el centro) siempre sea visible
-              className="object-cover object-center"
-              priority={index === 0}
-              sizes="100vw" // Ayuda a Next.js a optimizar la carga según el ancho de pantalla
-            />
+          <SwiperSlide key={banner.id || index} className="w-full">
+
+            {/* Imagen mobile */}
+            {banner.imageUrlMobile && (
+              <div className="w-full block md:hidden">
+                <Image
+                  src={getCloudinaryUrl(banner.imageUrlMobile, { width: 1280 })}
+                  alt={banner.alt || "Banner promocional"}
+                  width={1280}
+                  height={1370}
+                  className="w-full h-auto block"
+                  priority={index === 0}
+                  sizes="100vw"
+                  quality={100} // 🔥 1. Aumenta la calidad al máximo
+                  unoptimized={true} // 🔥 2. Evita que Next.js la comprima de nuevo
+                />
+              </div>
+            )}
+
+            {/* Imagen desktop */}
+            <div className={`w-full ${banner.imageUrlMobile ? 'hidden md:block' : 'block'}`}>
+              <Image
+                src={getCloudinaryUrl(banner.imageUrl, { width: 1920 })}
+                alt={banner.alt || "Banner promocional"}
+                width={1920}
+                height={600} 
+                className="w-full h-auto block" 
+                priority={index === 0}
+                sizes="100vw" 
+                quality={100} // 🔥 1. Aumenta la calidad al máximo
+                unoptimized={true} // 🔥 2. Evita la doble compresión con Cloudinary
+              />
+            </div>
+
           </SwiperSlide>
         ))}
       </Swiper>

@@ -128,7 +128,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100 font-sans">
+    <header className="bg-gray-200 sticky top-0 z-50 border-gray-100 font-sans">
       <div className="container mx-auto max-w-[1800px] px-[30px] sm:px-[38px] lg:px-[46px] relative">
         <div className="flex justify-between items-center h-24 gap-4">
           {/* 1. LOGO */}
@@ -336,9 +336,9 @@ export default function Header() {
             ) : (
               <Link
                 href="/login"
-                className="hidden md:flex items-center gap-2 text-sm font-bold text-secondary hover:text-primary transition"
+                className="hidden md:flex items-center gap-2 text-xl font-bold text-secondary hover:text-primary transition"
               >
-                <FaUser className="text-lg" />
+                <FaUser className="text-lg h-6" />
 
                 <span>Iniciar Sesión</span>
               </Link>
@@ -351,7 +351,7 @@ export default function Header() {
                 className="relative group p-3 bg-gray-100 rounded-full hover:bg-primary/10 transition"
                 onClick={() => setIsCartOpen(!isCartOpen)}
               >
-                <FaShoppingCart className="text-2xl text-secondary group-hover:text-primary" />
+                <FaShoppingCart className="text-2xl text-secondary group-hover:text-primary h-6" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-black h-6 w-6 flex items-center justify-center rounded-full border-2 border-white">
                     {totalItems}

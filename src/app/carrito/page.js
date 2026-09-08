@@ -197,7 +197,7 @@ export default function CarritoPage() {
                         <FaSpinner className="animate-spin" /> Procesando...
                     </>
                 ) : (
-                    "Proceder a cotizar"
+                    "Enviar Cotización"
                 )}
               </button>
 

@@ -37,20 +37,27 @@ export default function ProductInfo({ product }) {
       </p>
 
       {/* Título */}
-      <h1 className="text-5xl font-extrabold text-secondary mb-4">
+      <h1 className="text-4xl font-extrabold text-secondary mb-4 font-gilroy-bold tracking-tight">
         {product.name}
       </h1>
 
       {/* SKU */}
       {product.sku && (
-        <div className="text-gray-600 text-xl leading-relaxed mb-6">
+        <div className="text-gray-600 text-2xl leading-relaxed mb-6">
           <span className="font-bold">SKU:</span> {product.sku}
+        </div>
+      )}
+
+      {/* Descripción */}
+      {product.longDescription && (
+        <div className="text-2xl text-gray-600 mb-8">
+          {product.longDescription}
         </div>
       )}
 
       {/* Características */}
       {product.features && product.features.length > 0 && (
-        <ul className="list-disc list-inside text-lg text-gray-600 mb-8 space-y-2">
+        <ul className="list-disc list-inside text-xl text-gray-700 mb-8 space-y-2">
           {product.features.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}

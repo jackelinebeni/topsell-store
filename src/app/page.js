@@ -30,14 +30,14 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      
+      {/* HERO SECTION */}
+        <section className="w-full">
+           <HeroCarousel banners={banners} />
+        </section>
       {/* CONTENEDOR CENTRAL */}
       <div className="flex-grow w-full max-w-[2000px] mx-auto px-[30px] sm:px-[38px] lg:px-[46px] py-10 space-y-16">
         
-        {/* HERO SECTION */}
-        <section className="w-full rounded-2xl overflow-hidden shadow-lg">
-           <HeroCarousel banners={banners} />
-        </section>
+
 
         {/* CATEGORIES */}
         <section className="text-center">
