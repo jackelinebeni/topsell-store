@@ -15,7 +15,8 @@ const DEFAULT_SECTIONS = [
   { title: '7. Conservación de los datos', content: 'Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir con las finalidades para las que fueron recopilados o mientras exista una relación informativa o comercial con el usuario, salvo obligación legal de conservación por un plazo mayor.' },
   { title: '8. Modificaciones de la política', content: 'Corporación Topsell S.A.C. se reserva el derecho de modificar la presente Política de Privacidad para adaptarla a cambios normativos o mejoras en sus procesos. Cualquier modificación será publicada oportunamente en este sitio web.' },
 ];
-
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
 export default async function PoliticaPrivacidad() {
   const data = await getLegalPageContent('politica-privacidad');
   const title    = data?.title    || 'POLÍTICA DE PRIVACIDAD';

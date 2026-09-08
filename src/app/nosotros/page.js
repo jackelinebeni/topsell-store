@@ -63,6 +63,9 @@ const DEFAULT_VALUES = [
   },
 ];
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 export default async function NosotrosPage() {
   const data = await getAboutPageContent();
 
