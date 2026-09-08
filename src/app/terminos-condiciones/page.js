@@ -1,6 +1,9 @@
 ﻿import { getLegalPageContent } from '@/services/api';
 import { sanitizeRichText } from '@/utils/sanitizeHtml';
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "Términos y Condiciones",
 };
@@ -15,8 +18,7 @@ const DEFAULT_SECTIONS = [
   { title: '7. Enlaces externos', content: 'El sitio web puede contener enlaces a páginas de terceros. Corporación Topsell S.A.C. no se responsabiliza por el contenido, políticas o prácticas de dichos sitios.' },
   { title: '8. Legislación aplicable', content: 'Los presentes Términos y Condiciones se rigen por las leyes de la República del Perú.' },
 ];
-// Página completamente dinámica (sin caché)
-export const dynamic = 'force-dynamic';
+
 export default async function TerminosCondiciones() {
   const data = await getLegalPageContent('terminos-condiciones');
   const title    = data?.title    || 'TÉRMINOS Y CONDICIONES';

@@ -17,12 +17,12 @@ import {
 import { getAboutPageContent } from "@/services/api";
 import { sanitizeRichText } from "@/utils/sanitizeHtml";
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "Nosotros",
 };
-
-// Página completamente dinámica (sin caché)
-export const dynamic = 'force-dynamic';
 
 const ICON_MAP = {
   FaCubes,
