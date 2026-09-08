@@ -5,6 +5,9 @@ export const metadata = {
   title: "Términos y Condiciones",
 };
 
+// Página completamente dinámica (sin caché): refleja los cambios del admin al instante
+export const dynamic = 'force-dynamic';
+
 const DEFAULT_SECTIONS = [
   { title: '1. Objeto del sitio web', content: 'El presente sitio web es operado por Corporación Topsell S.A.C., y tiene como finalidad mostrar un catálogo referencial de productos, permitir la solicitud de cotizaciones y la suscripción para recibir información comercial. El uso del sitio web no constituye una venta directa ni genera una relación contractual automática.' },
   { title: '2. Uso del sitio', content: 'El usuario se compromete a utilizar el sitio web de forma lícita y adecuada, proporcionar información veraz y actualizada en los formularios de contacto, cotización o suscripción, y no realizar acciones que afecten la seguridad, funcionamiento o contenido del sitio web. Corporación Topsell S.A.C. se reserva el derecho de limitar o bloquear el acceso a usuarios que incumplan estas condiciones.' },

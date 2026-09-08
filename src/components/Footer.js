@@ -5,9 +5,6 @@ import Image from "next/image";
 import { submitNewsUser } from "@/services/api";
 import { safeExternalUrl, safeWhatsappNumber } from "@/utils/urlSafety";
 
-// Página completamente dinámica (sin caché)
-export const dynamic = 'force-dynamic';
-
 export default function Footer({ companyInfo }) {
   const weekdaysSchedule = companyInfo?.weekdaysSchedule || "Lunes - Viernes: 9:00AM - 6:00PM";
   const saturdaySchedule = companyInfo?.saturdaySchedule || "Sábado: 9:00AM - 2:00PM";

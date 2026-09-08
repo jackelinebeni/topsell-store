@@ -5,6 +5,9 @@ export const metadata = {
   title: "Política de Privacidad",
 };
 
+// Página completamente dinámica (sin caché): refleja los cambios del admin al instante
+export const dynamic = 'force-dynamic';
+
 const DEFAULT_SECTIONS = [
   { title: '1. Responsable del tratamiento de datos personales', content: 'Corporación Topsell S.A.C., con domicilio en Lima - Perú, es responsable del tratamiento de los datos personales recopilados a través de este sitio web, conforme a lo establecido en la Ley N° 29733 – Ley de Protección de Datos Personales y su Reglamento aprobado mediante Decreto Supremo N° 003-2013-JUS.' },
   { title: '2. Datos personales recopilados', content: 'A través de los formularios del sitio web se pueden recopilar: nombre y apellidos, correo electrónico, número de teléfono, empresa (si corresponde) e información proporcionada en solicitudes de cotización o contacto. No se recopilan datos sensibles ni información financiera.' },

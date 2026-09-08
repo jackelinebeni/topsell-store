@@ -23,6 +23,9 @@ export const metadata = {
   charset: "UTF-8",
 };
 
+// El footer (horarios, redes, whatsapp) se edita desde el admin: no debe congelarse en el build
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({ children }) {
   const companyInfo = await getCompanyInfo();
 
