@@ -21,6 +21,9 @@ export const metadata = {
   title: "Nosotros",
 };
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 const ICON_MAP = {
   FaCubes,
   FaGem,
@@ -62,9 +65,6 @@ const DEFAULT_VALUES = [
       "Actuamos con claridad y honestidad en nuestras comunicaciones y relaciones comerciales.",
   },
 ];
-
-// Página completamente dinámica (sin caché)
-export const dynamic = 'force-dynamic';
 
 export default async function NosotrosPage() {
   const data = await getAboutPageContent();
