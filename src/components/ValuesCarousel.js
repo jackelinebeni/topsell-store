@@ -17,6 +17,9 @@ import {
 } from "react-icons/fa";
 import { sanitizeRichText } from "@/utils/sanitizeHtml";
 
+// Página completamente dinámica (sin caché)
+export const dynamic = 'force-dynamic';
+
 const ICON_MAP = {
   FaCubes,
   FaGem,
