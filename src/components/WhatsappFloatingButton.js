@@ -6,8 +6,8 @@ export default function WhatsappFloatingButton({ phoneNumber, message = "Hola, q
   const href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-4">
-      <span className="bg-white text-secondary text-2xl font-bold px-4 py-2 shadow-md whitespace-nowrap">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 md:gap-4">
+      <span className="bg-white text-secondary text-sm md:text-2xl font-bold px-2 py-1 md:px-4 md:py-2 shadow-md whitespace-nowrap">
         Contáctate
         <br />
         con nosotros
@@ -17,7 +17,7 @@ export default function WhatsappFloatingButton({ phoneNumber, message = "Hola, q
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escríbenos por WhatsApp"
-        className="w-20 h-20 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center text-5xl shadow-lg hover:scale-110 transition-all duration-300"
+        className="w-12 h-12 md:w-20 md:h-20 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center text-3xl md:text-5xl shadow-lg hover:scale-110 transition-all duration-300"
       >
         <FaWhatsapp />
       </a>
