@@ -16,7 +16,7 @@ export const metadata = {
     default: "Topsell",
     template: "Topsell | %s",
   },
-  description: "Tienda oficial de Topsell Perú",
+  description: "Página oficial de Topsell Perú",
   icons: {
     icon: "/logotipo.png",
   },
